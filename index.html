@@ -19,7 +19,16 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in { animation: fadeIn 0.25s ease-out forwards; }
-    </style>
+    </style><script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('Service Worker registered!'))
+        .catch(err => console.log('Service Worker failed', err));
+    });
+  }
+</script>
+
 </head>
 <body class="bg-slate-100 text-slate-900 antialiased min-h-screen flex justify-center items-center">
 
