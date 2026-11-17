@@ -1,7 +1,7 @@
 {
   "name": "Thipaw Delivery Super-App",
   "short_name": "Thipaw Delivery",
-  "start_url": "/",
+  "start_url": "/-final-3/",
   "display": "standalone",
   "background_color": "#F8FAFC",
   "theme_color": "#FF5722",
