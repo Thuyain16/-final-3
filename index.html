@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thipaw Delivery Super-App</title><link rel="manifest" href="./manifest.json">
-
+    <title>Thipaw Delivery Super-App</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -120,7 +119,7 @@
                     <!-- SEARCH BAR -->
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">🔍</span>
-                        <input type="text" id="t-search-placeholder" placeholder="ဆိုင်နှင့် အစားအသောက် ရှာဖွေမည်..." oninput="openService('food')"
+                        <input type="text" id="t-search-placeholder" placeholder="ဆိုင်နှင့် အစားအသောက် ရှာဖွေမည်..." oninput="switchBottomTab('food')"
                             class="w-full rounded-2xl bg-white border border-slate-200/85 pl-10 pr-4 py-3 text-xs text-slate-900 shadow-2xs outline-none focus:border-[#FF5722]">
                     </div>
 
@@ -498,7 +497,7 @@
 
             </div>
 
-            <!-- BOTTOM NAVIGATION BAR -->
+            <!-- BOTTOM NAVIGATION BAR (Exact 4 icons matching the mockup) -->
             <div class="bg-white border-t border-slate-200 px-4 py-2.5 flex items-center justify-around shrink-0 z-20">
                 <button onclick="switchBottomTab('home')" id="nav-home" class="flex flex-col items-center text-[#FF5722] font-bold text-[11px] gap-0.5">
                     <span class="text-lg">🏠</span>
@@ -612,16 +611,19 @@
                     <div id="admin-staff-list" class="space-y-3"></div>
                 </div>
 
+                <!-- ADMIN HOTLINES MANAGEMENT TAB -->
                 <div id="admin-view-hotlines" class="space-y-4 hidden">
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-4">
                         <div>
                             <h3 class="text-xs font-extrabold text-slate-900">📞 ဖုန်းဖြင့် တိုက်ရိုက်ခေါ်ဆိုရန် Admin ဖုန်းနံပါတ်များ စီမံရန်</h3>
                             <p class="text-[11px] text-slate-500 mt-0.5">ဤနေရာတွင် Admin နံပါတ်များကို လိုသလောက် အသစ်ထပ်ထည့်ခြင်း သို့မဟုတ် ဖယ်ရှားခြင်း ပြုလုပ်နိုင်ပါသည်။</p>
                         </div>
+
                         <form onsubmit="addAdminHotline(event)" class="flex gap-2">
-                            <input type="tel" id="new-admin-phone" required placeholder="09xxxxxxxxx" class="flex-1 rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs text-slate-950 outline-none">
+                            <input type="tel" id="new-admin-phone" required placeholder="09xxxxxxxxx (ဖုန်းနံပါတ်သစ်)" class="flex-1 rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs text-slate-950 outline-none">
                             <button type="submit" class="px-4 py-2 rounded-xl bg-[#FF5722] text-white font-extrabold text-xs whitespace-nowrap">+ နံပါတ်ထည့်မည်</button>
                         </form>
+
                         <div id="admin-hotlines-manage-list" class="space-y-2 pt-2"></div>
                     </div>
                 </div>
@@ -629,6 +631,8 @@
                 <div id="admin-view-rates" class="space-y-4 hidden">
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-4">
                         <h3 id="t-editrates-title" class="text-xs font-extrabold text-slate-900">💵 ပို့ဆောင်ခနှင့် ကယ်ရီခနှုန်းထားများ ပြင်ဆင်ရန် (Ks)</h3>
+                        <p id="t-editrates-sub" class="text-[11px] text-slate-500">Order နှင့် Bike Taxi နှုန်းထားများကို သီးသန့်စီ သတ်မှတ်နိုင်ပါသည်။</p>
+                        
                         <form onsubmit="saveAdminRates(event)" class="space-y-3 text-xs">
                             <div class="p-3 bg-orange-50 rounded-xl border border-orange-200 space-y-3">
                                 <h4 class="font-extrabold text-[#FF5722]">📦 Order & Custom Buy Rates</h4>
@@ -642,7 +646,12 @@
                                         <input type="number" id="cfg-order-outer" required class="w-full mt-1 rounded-lg border border-slate-300 bg-white px-3 py-2 font-bold text-slate-950">
                                     </div>
                                 </div>
+                                <div>
+                                    <label class="font-bold text-slate-700">Multi-Shop Extra Stop (+ကျပ်)</label>
+                                    <input type="number" id="cfg-order-extrastop" required class="w-full mt-1 rounded-lg border border-slate-300 bg-white px-3 py-2 font-bold text-slate-950">
+                                </div>
                             </div>
+
                             <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 space-y-3">
                                 <h4 class="font-extrabold text-emerald-800">🛵 Bike Taxi Rates</h4>
                                 <div class="grid grid-cols-3 gap-2">
@@ -660,8 +669,20 @@
                                     </div>
                                 </div>
                             </div>
+
                             <button type="submit" id="t-saverates-btn" class="w-full py-3 rounded-xl bg-[#FF5722] text-white font-extrabold">
                                 နှုန်းထားအသစ် သိမ်းဆည်းမည်
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 id="t-editterms-title" class="text-xs font-extrabold text-slate-900">📋 စည်းမျဉ်းစည်းကမ်းများ ပြင်ဆင်ရန်</h3>
+                        <p id="t-editterms-sub" class="text-[11px] text-slate-500">စာကြောင်းတစ်ကြောင်းချင်းစီသည် Terms နှင့် About စာမျက်နှာများတွင် ပေါ်လာပါမည်။</p>
+                        <form onsubmit="saveAdminRules(event)" class="space-y-3">
+                            <textarea id="cfg-rules-textarea" rows="4" class="w-full rounded-xl border border-slate-300 p-3 text-xs text-slate-950 outline-none"></textarea>
+                            <button type="submit" id="t-saveterms-btn" class="w-full py-3 rounded-xl bg-slate-900 text-white font-extrabold text-xs">
+                                စည်းကမ်းချက်များ အသစ်ပြင်ဆင်မည်
                             </button>
                         </form>
                     </div>
@@ -669,20 +690,34 @@
             </div>
         </div>
 
-        <!-- 6. MAP PICKER MODAL -->
+        <!-- 6. GRAB STYLE SATELLITE MAP PICKER MODAL -->
         <div id="gmap-picker-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
             <div class="bg-white rounded-3xl max-w-[440px] w-full p-5 shadow-2xl space-y-4 fade-in">
                 <div class="flex items-center justify-between">
                     <h3 id="gmap-picker-title" class="text-sm font-extrabold text-slate-900">🛰️ မြေပုံတွင် Pin ထောက်ရန် (Grab Pin)</h3>
                     <button onclick="closeGoogleMapPicker()" class="w-8 h-8 rounded-full bg-slate-100 font-bold text-slate-600">✕</button>
                 </div>
+                <p id="t-mappicker-sub" class="text-[11px] text-slate-500">မြေပုံပေါ်တွင် အလိုရှိသော နေရာကို တိုက်ရိုက်ထောက်၍ ရွေးချယ်ပါ</p>
+
                 <div class="w-full h-64 rounded-2xl overflow-hidden border border-slate-200 relative">
                     <iframe id="picker-google-map-iframe" width="100%" height="100%" frameborder="0" style="border:0" src="" allowfullscreen></iframe>
                 </div>
+
+                <div class="space-y-1">
+                    <span id="t-quickmark-lbl" class="text-[10px] font-bold text-slate-400 uppercase">အမြန်ရွေးချယ်ရန် အထင်ကရနေရာများ:</span>
+                    <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                        <button type="button" onclick="selectHsipawLandmark(22.6238, 97.3005, 'Hsipaw Central Market')" class="px-2.5 py-1.5 rounded-lg bg-orange-50 border border-orange-200 text-[#FF5722] font-bold text-[11px] whitespace-nowrap">📍 Central Market</button>
+                        <button type="button" onclick="selectHsipawLandmark(22.6295, 97.2950, 'Hsipaw Haw Palace')" class="px-2.5 py-1.5 rounded-lg bg-orange-50 border border-orange-200 text-[#FF5722] font-bold text-[11px] whitespace-nowrap">📍 Haw Palace</button>
+                        <button type="button" onclick="selectHsipawLandmark(22.6170, 97.3110, 'Dokhtawaddy Bridge Gate')" class="px-2.5 py-1.5 rounded-lg bg-orange-50 border border-orange-200 text-[#FF5722] font-bold text-[11px] whitespace-nowrap">📍 Bridge Gate</button>
+                        <button type="button" onclick="selectHsipawLandmark(22.6580, 97.2650, 'Bawgyo Pagoda')" class="px-2.5 py-1.5 rounded-lg bg-orange-50 border border-orange-200 text-[#FF5722] font-bold text-[11px] whitespace-nowrap">📍 Bawgyo Pagoda</button>
+                    </div>
+                </div>
+
                 <div class="flex items-center justify-between text-xs bg-slate-50 p-2.5 rounded-xl border border-slate-200">
                     <button type="button" onclick="useLiveGpsInPicker()" id="t-usegps-btn" class="text-[#FF5722] font-extrabold flex items-center gap-1">🎯 လက်ရှိ GPS ယူမည်</button>
                     <span id="picker-coords-display" class="font-mono font-bold text-slate-950">22.6238, 97.3005</span>
                 </div>
+
                 <div class="grid grid-cols-2 gap-2.5">
                     <button type="button" onclick="closeGoogleMapPicker()" id="t-cancelmap-btn" class="py-3 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs">မရွေးတော့ပါ</button>
                     <button type="button" onclick="confirmGoogleMapPickerSelection()" id="t-confmap-btn" class="py-3 rounded-xl bg-[#FF5722] text-white font-extrabold text-xs">ဤနေရာကို အတည်ပြုမည်</button>
@@ -694,7 +729,13 @@
         <div id="about-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
             <div class="bg-white rounded-3xl max-w-[430px] w-full max-h-[85vh] overflow-y-auto p-6 shadow-2xl space-y-4 fade-in">
                 <div class="flex items-center justify-between">
-                    <h3 id="t-about-title" class="text-base font-extrabold text-slate-900">Thipaw Delivery အကြောင်း</h3>
+                    <div class="flex items-center gap-2.5">
+                        <img src="https://i.ibb.co/B5NfCWH9/1794811370987.jpg" alt="TD" class="w-10 h-10 rounded-xl border border-slate-200">
+                        <div>
+                            <h3 id="t-about-title" class="text-base font-extrabold text-slate-900">Thipaw Delivery အကြောင်း</h3>
+                            <p class="text-[11px] text-slate-500">Version 2.0 • Hsipaw Local Super-App</p>
+                        </div>
+                    </div>
                     <button onclick="closeAboutModal()" class="w-8 h-8 rounded-full bg-slate-100 font-bold text-slate-600">✕</button>
                 </div>
                 <p id="t-about-desc" class="text-xs text-slate-600 leading-relaxed">Thipaw Delivery သည် သီပေါမြို့တွင်း နေထိုင်သူများ၊ ဆိုင်ရှင်များနှင့် ဝန်ထမ်းများကို ချိတ်ဆက်ပေးသော Super-App ဖြစ်ပါသည်။</p>
@@ -709,19 +750,26 @@
         <!-- 8. CHAT MODAL -->
         <div id="chat-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 hidden items-end sm:items-center justify-center sm:p-4">
             <div class="bg-[#F8FAFC] w-full max-w-[460px] h-[88vh] sm:h-[640px] rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden fade-in">
-                <div class="bg-gradient-to-r from-[#FF5722] to-[#FF6D00] text-white px-4 py-3.5 flex items-center justify-between shrink-0">
+                <div class="bg-gradient-to-r from-[#FF5722] to-[#FF6D00] text-white px-4 py-3.5 flex items-center justify-between shrink-0 shadow-xs">
                     <div class="flex items-center gap-2.5 min-w-0">
                         <button onclick="closeChatModal()" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold shrink-0">←</button>
                         <div class="min-w-0">
                             <h3 id="chat-header-title" class="text-sm font-extrabold truncate">💬 Live Order Chat</h3>
+                            <p id="chat-header-subtitle" class="text-[11px] text-orange-100 truncate">Direct message regarding your order</p>
                         </div>
                     </div>
                 </div>
                 <div id="chat-order-summary" class="bg-orange-50 border-b border-orange-200/80 px-4 py-2 text-[11px] text-slate-700 flex items-center justify-between shrink-0"></div>
                 <div id="chat-messages-feed" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+                <div class="bg-white border-t border-slate-100 px-3 pt-2.5 pb-1.5 shrink-0">
+                    <p id="t-quickreplies-lbl" class="text-[10px] font-bold text-slate-400 mb-1.5 px-1">အမြန်စာပို့ရန် (Quick Replies):</p>
+                    <div id="chat-quick-replies" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1"></div>
+                </div>
                 <form onsubmit="sendChatMessage(event)" class="bg-white border-t border-slate-200 p-3 flex items-center gap-2 shrink-0">
                     <input type="text" id="chat-text-input" placeholder="Type a message..." class="flex-1 rounded-full bg-slate-100 border border-slate-200 px-4 py-2.5 text-sm text-slate-950 outline-none">
-                    <button type="submit" class="w-10 h-10 rounded-full bg-[#FF5722] text-white flex items-center justify-center shadow-sm shrink-0">➢</button>
+                    <button type="submit" class="w-10 h-10 rounded-full bg-[#FF5722] text-white flex items-center justify-center shadow-sm shrink-0">
+                        <svg class="w-5 h-5 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z"/></svg>
+                    </button>
                 </form>
             </div>
         </div>
@@ -729,33 +777,48 @@
         <!-- 9. SECURITY PIN MODALS -->
         <div id="pin-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-5">
             <div class="bg-white rounded-3xl max-w-xs w-full p-6 text-center shadow-2xl space-y-4 fade-in">
-                <h3 class="text-base font-extrabold text-slate-900">Admin ဝင်ရောက်ရန်</h3>
+                <div class="w-12 h-12 bg-orange-100 text-[#FF5722] rounded-2xl flex items-center justify-center text-xl mx-auto">🔒</div>
+                <div>
+                    <h3 id="t-adminpin-title" class="text-base font-extrabold text-slate-900">Admin ဝင်ရောက်ရန်</h3>
+                    <p id="t-adminpin-sub" class="text-xs text-slate-500 mt-1">PIN နံပါတ် ၄ လုံး ရိုက်ထည့်ပါ</p>
+                </div>
                 <input type="password" id="pin-input" maxlength="4" inputmode="numeric" placeholder="••••" onkeyup="if(event.key === 'Enter') verifyPin()" class="w-full text-center tracking-[0.5em] text-xl font-extrabold rounded-xl border border-slate-300 py-3 text-slate-950 outline-none">
+                <p id="pin-error" class="hidden text-xs font-bold text-red-600">Invalid Admin PIN</p>
                 <div class="grid grid-cols-2 gap-2 pt-1">
-                    <button onclick="closePinModal()" class="py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs">ပိတ်မည်</button>
-                    <button onclick="verifyPin()" class="py-2.5 rounded-xl bg-[#FF5722] text-white font-bold text-xs">ဝင်မည်</button>
+                    <button onclick="closePinModal()" id="t-canceladm-btn" class="py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs">ပိတ်မည်</button>
+                    <button onclick="verifyPin()" id="t-unlockadm-btn" class="py-2.5 rounded-xl bg-[#FF5722] text-white font-bold text-xs">ဝင်မည်</button>
                 </div>
             </div>
         </div>
 
         <div id="rider-pin-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-5">
             <div class="bg-white rounded-3xl max-w-xs w-full p-6 text-center shadow-2xl space-y-4 fade-in">
-                <h3 class="text-base font-extrabold text-slate-900">ဝန်ထမ်း အခွင့်အရေး ဝင်ရန်</h3>
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-xl mx-auto">🛵</div>
+                <div>
+                    <h3 id="t-staffpin-title" class="text-base font-extrabold text-slate-900">ဝန်ထမ်း အခွင့်အရေး ဝင်ရန်</h3>
+                    <p id="t-staffpin-sub" class="text-xs text-slate-500 mt-1">Staff PIN နံပါတ် ရိုက်ထည့်ပါ</p>
+                </div>
                 <input type="password" id="rider-pin-input" maxlength="4" inputmode="numeric" placeholder="••••" onkeyup="if(event.key === 'Enter') verifyRiderPin()" class="w-full text-center tracking-[0.5em] text-xl font-extrabold rounded-xl border border-slate-300 py-3 text-slate-950 outline-none">
+                <p id="rider-pin-error" class="hidden text-xs font-bold text-red-600">Invalid Staff PIN</p>
                 <div class="grid grid-cols-2 gap-2 pt-1">
-                    <button onclick="closeRiderPinModal()" class="py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs">ပိတ်မည်</button>
-                    <button onclick="verifyRiderPin()" class="py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs">ဆက်သွားမည်</button>
+                    <button onclick="closeRiderPinModal()" id="t-cancelstaff-btn" class="py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs">ပိတ်မည်</button>
+                    <button onclick="verifyRiderPin()" id="t-continuestaff-btn" class="py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs">ဆက်သွားမည်</button>
                 </div>
             </div>
         </div>
 
         <div id="shop-pass-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-5">
             <div class="bg-white rounded-3xl max-w-xs w-full p-6 text-center shadow-2xl space-y-4 fade-in">
-                <h3 class="text-base font-extrabold text-slate-900">ဆိုင်ပိုင်ရှင် ဝင်ရန်</h3>
+                <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-2xl mx-auto">🏪</div>
+                <div>
+                    <h3 id="t-merchpin-title" class="text-base font-extrabold text-slate-900">ဆိုင်ပိုင်ရှင် ဝင်ရန်</h3>
+                    <p id="t-merchpin-sub" class="text-xs text-slate-500 mt-1">ဆိုင်ဖွင့်ခွင့် PIN နံပါတ် ရိုက်ထည့်ပါ</p>
+                </div>
                 <input type="password" id="shop-pass-input" maxlength="4" inputmode="numeric" placeholder="••••" onkeyup="if(event.key === 'Enter') verifyShopPassword()" class="w-full text-center tracking-[0.5em] text-xl font-extrabold rounded-xl border border-slate-300 py-3 text-slate-950 outline-none">
+                <p id="shop-pass-error" class="hidden text-xs font-bold text-red-600">Invalid Merchant PIN</p>
                 <div class="grid grid-cols-2 gap-2 pt-1">
-                    <button onclick="closeShopPassModal()" class="py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs">ပိတ်မည်</button>
-                    <button onclick="verifyShopPassword()" class="py-2.5 rounded-xl bg-[#FF5722] text-white font-bold text-xs">ဝင်မည်</button>
+                    <button onclick="closeShopPassModal()" id="t-cancelmerch-btn" class="py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs">ပိတ်မည်</button>
+                    <button onclick="verifyShopPassword()" id="t-unlockmerch-btn" class="py-2.5 rounded-xl bg-[#FF5722] text-white font-bold text-xs">ဝင်မည်</button>
                 </div>
             </div>
         </div>
@@ -809,7 +872,7 @@
             bikeBawgyo: 8000,
             rules: [
                 "Standard order delivery fee applies inside town up to one motorbike load.",
-                "Outer zone areas carry an adjusted rate.",
+                "Outer zone areas (San Phet, Tonsint, Zawtsu, Htaung Gyi) carry an adjusted rate.",
                 "Food and market item costs are paid directly according to the store receipt plus delivery fee.",
                 "Orders can only be cancelled before a rider accepts and begins purchasing your items.",
                 "Bike Taxi rates are calculated based on town or distant zones (Bawgyo)."
@@ -820,6 +883,7 @@
         let termsAccepted = localStorage.getItem(TERMS_KEY) === 'true';
         let userProfile = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)) || null;
         let appConfig = JSON.parse(localStorage.getItem(CONFIG_STORAGE_KEY)) || DEFAULT_CONFIG;
+        
         let adminHotlines = JSON.parse(localStorage.getItem(HOTLINES_STORAGE_KEY)) || ["09981968136"];
 
         let allShops = JSON.parse(localStorage.getItem(SHOPS_STORAGE_KEY)) || [
@@ -964,7 +1028,37 @@
                 refreshStatusBtn: "Refresh Status",
                 availPoolLbl: "Available Orders Pool",
                 adminHdrTitle: "Admin Control Panel",
-                adminHdrSub: "Live Dispatch, Staff Approvals & Pricing"
+                adminHdrSub: "Live Dispatch, Staff Approvals & Pricing",
+                riderSecTitle: "Rider Access Security",
+                riderSecSub: "Approve or reject rider staff applications here.",
+                editRatesTitle: "💵 Edit Delivery & Bike Taxi Rates (Ks)",
+                editRatesSub: "Separate rates for orders and bike taxi.",
+                saveRatesBtn: "Save New Rates",
+                editTermsTitle: "📋 Edit Terms & Conditions",
+                editTermsSub: "Each line below appears as a rule on the Terms & About screens.",
+                saveTermsBtn: "Update Terms & Rules",
+                mapPickerSub: "Select a landmark or use live GPS in Hsipaw",
+                quickMarkLbl: "Quick Hsipaw Landmarks:",
+                useGpsBtn: "🎯 Use Live GPS",
+                cancelMapBtn: "Cancel",
+                confMapBtn: "Confirm Location",
+                aboutTitle: "About Thipaw Delivery",
+                aboutDesc: "Thipaw Delivery connects residents, restaurants, and verified riders across Hsipaw Township.",
+                aboutRulesTitle: "📋 Service Terms & Rules",
+                aboutCloseBtn: "Close",
+                quickRepliesLbl: "Quick Replies:",
+                adminPinTitle: "Admin Access",
+                adminPinSub: "Enter your 4-digit security PIN",
+                cancelAdmBtn: "Cancel",
+                unlockAdmBtn: "Unlock",
+                staffPinTitle: "Rider Staff Access",
+                staffPinSub: "Enter Staff PIN once to register or access dispatch",
+                cancelStaffBtn: "Cancel",
+                continueStaffBtn: "Continue",
+                merchPinTitle: "Merchant Portal",
+                merchPinSub: "Enter your Shop Access PIN",
+                cancelMerchBtn: "Cancel",
+                unlockMerchBtn: "Unlock"
             },
             my: {
                 welcomeSub: "သီပေါမြို့တွင်း ပို့ဆောင်ခနှင့် ဆိုင်ကယ်ကယ်ရီ နှုန်းထားများ",
@@ -1057,7 +1151,37 @@
                 refreshStatusBtn: "အခြေအနေ စစ်ဆေးမည်",
                 availPoolLbl: "ရယူနိုင်သော အော်ဒါများ",
                 adminHdrTitle: "Admin စီမံခန့်ခွဲမှု နေရာ",
-                adminHdrSub: "အော်ဒါများ၊ ဝန်ထမ်းအတည်ပြုချက်များနှင့် ဖုန်းနံပါတ်များ စီမံရန်"
+                adminHdrSub: "အော်ဒါများ၊ ဝန်ထမ်းအတည်ပြုချက်များနှင့် ဖုန်းနံပါတ်များ စီမံရန်",
+                riderSecTitle: "ဝန်ထမ်း လုံခြုံရေး စနစ်",
+                riderSecSub: "ဤနေရာတွင် ဝန်ထမ်းအသစ်များကို အတည်ပြုခြင်း သို့မဟုတ် ငြင်းပယ်ခြင်း (ဖျက်ခြင်း) ပြုလုပ်နိုင်ပါသည်။",
+                editRatesTitle: "💵 ပို့ဆောင်ခနှင့် ကယ်ရီခနှုန်းထားများ ပြင်ဆင်ရန် (ကျပ်)",
+                editRatesSub: "Order နှင့် Bike Taxi နှုန်းထားများကို သီးသန့်စီ သတ်မှတ်နိုင်ပါသည်။",
+                saveRatesBtn: "နှုန်းထားအသစ် သိမ်းဆည်းမည်",
+                editTermsTitle: "📋 စည်းမျဉ်းစည်းကမ်းများ ပြင်ဆင်ရန်",
+                editTermsSub: "စာကြောင်းတစ်ကြောင်းချင်းစီသည် Terms နှင့် About စာမျက်နှာများတွင် ပေါ်လာပါမည်။",
+                saveTermsBtn: "စည်းကမ်းချက်များ အသစ်ပြင်ဆင်မည်",
+                mapPickerSub: "သီပေါမြို့ ဂြိုဟ်တုမြေပုံတွင် Pin တိုက်ရိုက်ထောက်၍ ရွေးချယ်ပါ",
+                quickMarkLbl: "အမြန်ရွေးချယ်ရန် အထင်ကရနေရာများ:",
+                useGpsBtn: "🎯 လက်ရှိ GPS ယူမည်",
+                cancelMapBtn: "မရွေးတော့ပါ",
+                confMapBtn: "ဤနေရာကို အတည်ပြုမည်",
+                aboutTitle: "Thipaw Delivery အကြောင်း",
+                aboutDesc: "Thipaw Delivery သည် သီပေါမြို့တွင်း နေထိုင်သူများ၊ ဆိုင်ရှင်များနှင့် ဝန်ထမ်းများကို ချိတ်ဆက်ပေးသော Super-App ဖြစ်ပါသည်။",
+                aboutRulesTitle: "📋 ဝန်ဆောင်မှု စည်းကမ်းချက်များ",
+                aboutCloseBtn: "ပိတ်မည်",
+                quickRepliesLbl: "အမြန်စာပို့ရန် (Quick Replies):",
+                adminPinTitle: "Admin ဝင်ရောက်ရန်",
+                adminPinSub: "PIN နံပါတ် ၄ လုံး ရိုက်ထည့်ပါ",
+                cancelAdmBtn: "ပိတ်မည်",
+                unlockadmBtn: "ဝင်မည်",
+                staffPinTitle: "ဝန်ထမ်း အခွင့်အရေး ဝင်ရန်",
+                staffPinSub: "Staff PIN နံပါတ် ရိုက်ထည့်ပါ",
+                cancelStaffBtn: "ပိတ်မည်",
+                continueStaffBtn: "ဆက်သွားမည်",
+                merchPinTitle: "ဆိုင်ပိုင်ရှင် ဝင်ရန်",
+                merchPinSub: "ဆိုင်ဖွင့်ခွင့် PIN နံပါတ် ရိုက်ထည့်ပါ",
+                cancelMerchBtn: "ပိတ်မည်",
+                unlockMerchBtn: "ဝင်မည်"
             }
         };
 
@@ -1158,6 +1282,7 @@
             setTxt('t-locme-btn', t.locMeBtn);
 
             setTxt('t-riderhdr-title', t.riderHdrTitle);
+            setTxt('t-exit-btn', t.exitBtn || "Exit");
             setTxt('t-riderreg-title', t.riderRegTitle);
             setTxt('t-riderreg-sub', t.riderRegSub);
             setTxt('t-ridername-lbl', t.riderNameLbl);
@@ -1170,6 +1295,53 @@
 
             setTxt('t-adminhdr-title', t.adminHdrTitle);
             setTxt('t-adminhdr-sub', t.adminHdrSub);
+            setTxt('t-adminexit-btn', t.exitBtn || "Exit");
+            setTxt('t-ridersec-title', t.riderSecTitle);
+            setTxt('t-ridersec-sub', t.riderSecSub);
+            setTxt('t-editrates-title', t.editRatesTitle);
+            setTxt('t-editrates-sub', t.editRatesSub);
+            setTxt('t-saverates-btn', t.saveRatesBtn);
+            setTxt('t-editterms-title', t.editTermsTitle);
+            setTxt('t-editterms-sub', t.editTermsSub);
+            setTxt('t-saveterms-btn', t.saveTermsBtn);
+
+            setTxt('gmap-picker-title', `🛰️ မြေပုံတွင် Pin ထောက်ရန် (Grab Pin)`);
+            setTxt('t-mappicker-sub', t.mapPickerSub);
+            setTxt('t-quickmark-lbl', t.quickMarkLbl);
+            setTxt('t-usegps-btn', t.useGpsBtn);
+            setTxt('t-cancelmap-btn', t.cancelMapBtn);
+            setTxt('t-confmap-btn', t.confMapBtn);
+
+            setTxt('t-about-title', t.aboutTitle);
+            setTxt('t-about-desc', t.aboutDesc);
+            setTxt('t-about-rulestitle', t.aboutRulesTitle);
+            setTxt('t-aboutclose-btn', t.aboutCloseBtn);
+            setTxt('t-quickreplies-lbl', t.quickRepliesLbl);
+
+            setTxt('t-adminpin-title', t.adminPinTitle);
+            setTxt('t-adminpin-sub', t.adminPinSub);
+            setTxt('t-canceladm-btn', t.cancelAdmBtn);
+            setTxt('t-unlockadm-btn', t.unlockadmBtn);
+
+            setTxt('t-staffpin-title', t.staffPinTitle);
+            setTxt('t-staffpin-sub', t.staffPinSub);
+            setTxt('t-cancelstaff-btn', t.cancelStaffBtn);
+            setTxt('t-continuestaff-btn', t.continueStaffBtn);
+
+            setTxt('t-merchpin-title', t.merchPinTitle);
+            setTxt('t-merchpin-sub', t.merchPinSub);
+            setTxt('t-cancelmerch-btn', t.cancelMerchBtn);
+            setTxt('t-unlockmerch-btn', t.unlockMerchBtn);
+
+            const activeCls = "px-2.5 py-1 rounded-full bg-white text-[#FF5722]";
+            const inactiveCls = "px-2.5 py-1 rounded-full text-white";
+            document.getElementById('welcome-lang-en').className = currentLang === 'en' ? activeCls : inactiveCls;
+            document.getElementById('welcome-lang-my').className = currentLang === 'my' ? activeCls : inactiveCls;
+
+            const setAct = "px-3 py-1 rounded-lg bg-[#FF5722] text-white";
+            const setInact = "px-3 py-1 rounded-lg text-slate-600";
+            document.getElementById('set-lang-en').className = currentLang === 'en' ? setAct : setInact;
+            document.getElementById('set-lang-my').className = currentLang === 'my' ? setAct : setInact;
 
             renderDynamicRatesAndRules();
         }
@@ -1180,20 +1352,25 @@
             const manageList = document.getElementById('admin-hotlines-manage-list');
 
             const hotlinesHtml = adminHotlines.map(num => `
-                <a href="tel:${num}" class="px-3.5 py-2 rounded-xl bg-orange-100 text-[#FF5722] font-extrabold text-xs flex items-center gap-1.5">
+                <a href="tel:${num}" class="px-3.5 py-2 rounded-xl bg-orange-100 hover:bg-orange-200 text-[#FF5722] font-extrabold text-xs flex items-center gap-1.5 transition">
                     <span>📞</span><span>${escapeHtml(num)}</span>
                 </a>
             `).join('');
 
             if (homeBox) homeBox.innerHTML = hotlinesHtml;
             if (profileBox) profileBox.innerHTML = hotlinesHtml;
+
             if (manageList) {
-                manageList.innerHTML = adminHotlines.map((num, idx) => `
-                    <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-xs">
-                        <span class="font-bold text-slate-900">📞 ${escapeHtml(num)}</span>
-                        <button type="button" onclick="removeAdminHotline(${idx})" class="px-2.5 py-1 rounded-lg bg-red-50 text-red-600 font-bold">ဖယ်ရှားမည်</button>
-                    </div>
-                `).join('');
+                if (adminHotlines.length === 0) {
+                    manageList.innerHTML = `<p class="text-xs text-slate-400">No admin hotlines added</p>`;
+                } else {
+                    manageList.innerHTML = adminHotlines.map((num, idx) => `
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-xs">
+                            <span class="font-bold text-slate-900">📞 ${escapeHtml(num)}</span>
+                            <button type="button" onclick="removeAdminHotline(${idx})" class="px-2.5 py-1 rounded-lg bg-red-50 text-red-600 font-bold">ဖယ်ရှားမည်</button>
+                        </div>
+                    `).join('');
+                }
             }
         }
 
@@ -1210,10 +1387,14 @@
         }
 
         function removeAdminHotline(idx) {
-            if (adminHotlines.length <= 1) return;
+            if (adminHotlines.length <= 1) {
+                showToast("Admin နံပါတ် အနည်းဆုံး တစ်ခုတော့ ရှိရပါမည်");
+                return;
+            }
             adminHotlines.splice(idx, 1);
             localStorage.setItem(HOTLINES_STORAGE_KEY, JSON.stringify(adminHotlines));
             renderAdminHotlinesUI();
+            showToast("ဖုန်းနံပါတ် ဖယ်ရှားပြီးပါပြီ");
         }
 
         function playNewOrderChime() {
@@ -1238,14 +1419,26 @@
 
         function triggerOrderNotification(order) {
             playNewOrderChime();
+            if ("Notification" in window && Notification.permission === "granted") {
+                new Notification("New Thipaw Delivery Order!", {
+                    body: `${order.customerName} • ${order.details}`,
+                    icon: "https://i.ibb.co/B5NfCWH9/1794811370987.jpg"
+                });
+            }
         }
 
         function requestLocationPermission() {
             if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(() => {
-                    document.getElementById('perm-loc-status').textContent = "✅ Allowed";
-                    document.getElementById('perm-loc-status').className = "text-[10px] font-bold text-emerald-650";
-                }, () => {});
+                navigator.geolocation.getCurrentPosition(
+                    () => {
+                        document.getElementById('perm-loc-status').textContent = "✅ Allowed";
+                        document.getElementById('perm-loc-status').className = "text-[10px] font-bold text-emerald-600";
+                        showToast(currentLang === 'my' ? "Location ခွင့်ပြုပြီးပါပြီ" : "Location enabled");
+                    },
+                    () => {
+                        showToast(currentLang === 'my' ? "ကျေးဇူးပြု၍ Location ဖွင့်ပေးပါ" : "Please allow Location");
+                    }
+                );
             }
         }
 
@@ -1255,17 +1448,19 @@
                     const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
                     stream.getTracks().forEach(track => track.stop());
                     document.getElementById('perm-cam-status').textContent = "✅ Allowed";
-                    document.getElementById('perm-cam-status').className = "text-[10px] font-bold text-emerald-650";
+                    document.getElementById('perm-cam-status').className = "text-[10px] font-bold text-emerald-600";
+                    showToast(currentLang === 'my' ? "Camera ခွင့်ပြုပြီးပါပြီ" : "Camera enabled");
                 }
             } catch (err) {}
         }
 
         function requestNotificationPermission() {
+            playNewOrderChime();
             if ("Notification" in window) {
                 Notification.requestPermission().then(res => {
                     if (res === "granted") {
                         document.getElementById('perm-noti-status').textContent = "✅ Allowed";
-                        document.getElementById('perm-noti-status').className = "text-[10px] font-bold text-emerald-650";
+                        document.getElementById('perm-noti-status').className = "text-[10px] font-bold text-emerald-600";
                     }
                 });
             }
@@ -1283,85 +1478,34 @@
 
         function saveOrders() {
             localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(allOrders));
-            if (allOrders.length > lastKnownOrderCount) triggerOrderNotification(allOrders[0]);
+            if (allOrders.length > lastKnownOrderCount) {
+                triggerOrderNotification(allOrders[0]);
+            }
             lastKnownOrderCount = allOrders.length;
         }
 
-        // ==========================================
-        // 🎯 BACK BUTTON & HISTORY ROUTING LOGIC (SPA)
-        // ==========================================
-        let currentScreenState = 'home'; // 'home', 'food', 'custom', 'bike', 'map', 'activity', 'account', 'shop-manager', 'rider', 'admin'
-
-        window.addEventListener('popstate', (event) => {
-            // ဖုန်းရဲ့ Back ခလုတ်ကို နှိပ်လိုက်သောအခါ History Pop ဖြစ်စဉ်
-            const state = event.state;
-            if (state && state.screen) {
-                navigateToScreen(state.screen, false);
-            } else {
-                // အကယ်၍ State မရှိတော့လျှင် Home သို့ ပြန်ပို့မည် (သို့မဟုတ် အပြင်မထွက်စေဘဲ Home ကိုပြမည်)
-                navigateToScreen('home', false);
+        window.addEventListener('storage', (e) => {
+            if (e.key === ORDERS_STORAGE_KEY) {
+                const updated = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY)) || [];
+                if (updated.length > allOrders.length) triggerOrderNotification(updated[0]);
+                allOrders = updated;
+                lastKnownOrderCount = allOrders.length;
+                refreshVisibleScreens();
             }
         });
 
-        function navigateToScreen(screenKey, pushHistory = true) {
-            currentScreenState = screenKey;
-            hideAllViews();
-            document.getElementById('main-scroll-area').scrollTop = 0;
-
-            if (pushHistory) {
-                history.pushState({ screen: screenKey }, "", "");
-            }
-
-            if (screenKey === 'home') {
-                document.getElementById('view-home').classList.remove('hidden');
-                highlightNav('nav-home');
-                renderHomeShopsStrip();
-                renderHomeActiveOrder();
-                renderAdminHotlinesUI();
-            } else if (screenKey === 'food') {
-                document.getElementById('view-food').classList.remove('hidden');
-                renderFoodShopBrowser();
-                renderFoodCart();
-            } else if (screenKey === 'custom') {
-                document.getElementById('view-custom').classList.remove('hidden');
-                updateCustomFeeDisplay();
-            } else if (screenKey === 'bike') {
-                document.getElementById('view-bike').classList.remove('hidden');
-                recalculateBikeFare();
-            } else if (screenKey === 'map') {
-                document.getElementById('view-map').classList.remove('hidden');
-                highlightNav('nav-map');
-                refreshMainGoogleMapIframe();
-            } else if (screenKey === 'activity') {
-                document.getElementById('view-activity').classList.remove('hidden');
-                highlightNav('nav-activity');
-                renderUserActivity();
-            } else if (screenKey === 'account') {
-                document.getElementById('view-account').classList.remove('hidden');
-                highlightNav('nav-account');
-                renderAdminHotlinesUI();
-            } else if (screenKey === 'shop-manager') {
-                document.getElementById('view-shop-manager').classList.remove('hidden');
-                renderShopManagerList();
-            } else if (screenKey === 'rider') {
-                document.getElementById('main-app-shell').classList.add('hidden');
-                document.getElementById('rider-screen').classList.remove('hidden');
-                renderRiderPortalState();
-            } else if (screenKey === 'admin') {
-                document.getElementById('main-app-shell').classList.add('hidden');
-                document.getElementById('admin-screen').classList.remove('hidden');
-                switchAdminTab('orders');
-            }
+        function refreshVisibleScreens() {
+            renderHomeActiveOrder();
+            updateUnreadIndicators();
+            if (!document.getElementById('view-activity').classList.contains('hidden')) renderUserActivity();
+            if (!document.getElementById('admin-screen').classList.contains('hidden')) renderAdminOrders();
+            if (!document.getElementById('rider-screen').classList.contains('hidden')) renderRiderPortalState();
         }
 
         window.onload = function() {
             applyLanguageStrings();
             renderGrabSuggestedPlaces();
             renderAdminHotlinesUI();
-
-            // Initial History State Push
-            history.replaceState({ screen: 'home' }, "", "");
-
             if (!termsAccepted) {
                 showTermsScreen();
             } else if (!userProfile) {
@@ -1383,17 +1527,22 @@
             if (ratesList) {
                 ratesList.innerHTML = `
                     <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-orange-100">
-                        <div><p class="font-bold text-slate-800">${currentLang === 'my' ? '🛒 မြို့တွင်း Order ပို့ဆောင်ခ' : 'Order Town Base'}</p></div>
+                        <div><p class="font-bold text-slate-800">${currentLang === 'my' ? '🛒 မြို့တွင်း Order ပို့ဆောင်ခ' : 'Order Town Base'}</p><p class="text-[11px] text-slate-500">ဈေးပိုင်း၊ မြို့လယ်</p></div>
                         <span class="font-extrabold text-[#FF5722] text-sm">${Number(appConfig.orderTown).toLocaleString()} Ks</span>
                     </div>
                     <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-orange-100">
-                        <div><p class="font-bold text-slate-800">${currentLang === 'my' ? '🛵 မြို့တွင်း Bike Taxi' : 'Bike Taxi Town Base'}</p></div>
+                        <div><p class="font-bold text-slate-800">${currentLang === 'my' ? '🛵 မြို့တွင်း Bike Taxi' : 'Bike Taxi Town Base'}</p><p class="text-[11px] text-slate-500">မြို့တွင်းသွားလာရန်</p></div>
                         <span class="font-extrabold text-[#FF5722] text-sm">${Number(appConfig.bikeTown).toLocaleString()} Ks</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-orange-100">
+                        <div><p class="font-bold text-slate-800">${currentLang === 'my' ? '🌄 ဘော်ကြိုဘက် Bike Taxi' : 'Bawgyo Bike Taxi'}</p><p class="text-[11px] text-slate-500">ဘော်ကြိုဘုရား၊ တုံစင့်</p></div>
+                        <span class="font-extrabold text-[#FF5722] text-sm">${Number(appConfig.bikeBawgyo).toLocaleString()} Ks</span>
                     </div>
                 `;
             }
+
             const startingBadge = document.getElementById('home-starting-rate');
-            if (startingBadge) startingBadge.textContent = `From ${Number(appConfig.orderTown).toLocaleString()} Ks`;
+            if (startingBadge) startingBadge.textContent = `${currentLang === 'my' ? 'မြို့တွင်း' : 'From'} ${Number(appConfig.orderTown).toLocaleString()} Ks`;
 
             const rulesHtml = (appConfig.rules || []).map(r => `<li>${escapeHtml(r)}</li>`).join('');
             const dRules = document.getElementById('dynamic-rules-list');
@@ -1407,6 +1556,8 @@
             document.getElementById('terms-screen').classList.remove('hidden');
             document.getElementById('register-screen').classList.add('hidden');
             document.getElementById('main-app-shell').classList.add('hidden');
+            document.getElementById('admin-screen').classList.add('hidden');
+            document.getElementById('rider-screen').classList.add('hidden');
         }
 
         function acceptTermsAndProceed() {
@@ -1428,18 +1579,32 @@
             document.getElementById('about-modal').classList.remove('flex');
         }
 
-        function triggerLiveSelfieCapture() { document.getElementById('reg-photo').click(); }
+        function triggerLiveSelfieCapture() {
+            document.getElementById('reg-photo').click();
+        }
 
         function processVerifiedSelfie(event) {
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
             reader.onload = function(e) {
-                tempAvatarUrl = e.target.result;
-                selfieVerified = true;
-                document.getElementById('avatar-preview-box').innerHTML = `<img src="${tempAvatarUrl}" class="w-full h-full object-cover">`;
-                document.getElementById('selfie-verified-tag').classList.remove('hidden');
-                showToast("Selfie verified!");
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const maxDim = 320;
+                    let w = img.width, h = img.height;
+                    if (w > h) { if (w > maxDim) { h *= maxDim / w; w = maxDim; } }
+                    else { if (h > maxDim) { w *= maxDim / h; h = maxDim; } }
+                    canvas.width = w; canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, w, h);
+                    tempAvatarUrl = canvas.toDataURL('image/jpeg', 0.82);
+                    selfieVerified = true;
+                    document.getElementById('avatar-preview-box').innerHTML = `<img src="${tempAvatarUrl}" class="w-full h-full object-cover">`;
+                    document.getElementById('selfie-verified-tag').classList.remove('hidden');
+                    showToast(currentLang === 'my' ? "ကင်မရာပုံ အတည်ပြုပြီးပါပြီ" : "Selfie verified!");
+                };
+                img.src = e.target.result;
             };
             reader.readAsDataURL(file);
         }
@@ -1449,16 +1614,26 @@
             const name = document.getElementById('reg-name').value.trim();
             const phone = document.getElementById('reg-phone').value.trim();
             const address = document.getElementById('reg-address').value.trim();
-            if (!tempAvatarUrl || !selfieVerified) { triggerLiveSelfieCapture(); return; }
+
+            if (!tempAvatarUrl || !selfieVerified) {
+                showToast(currentLang === 'my' ? "ကျေးဇူးပြု၍ ကင်မရာဖြင့် ဓာတ်ပုံအရင်ရိုက်ပါ" : "Please take live selfie");
+                triggerLiveSelfieCapture();
+                return;
+            }
+            if (!name || !phone || !address) return;
+
             userProfile = { name, phone, address, photo: tempAvatarUrl };
             localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userProfile));
             enterMainApp();
+            showToast(currentLang === 'my' ? "အကောင့်ဖွင့်ခြင်း အောင်မြင်ပါသည်" : "Account created!");
         }
 
         function showRegistration() {
             document.getElementById('terms-screen').classList.add('hidden');
             document.getElementById('register-screen').classList.remove('hidden');
             document.getElementById('main-app-shell').classList.add('hidden');
+            document.getElementById('admin-screen').classList.add('hidden');
+            document.getElementById('rider-screen').classList.add('hidden');
         }
 
         function openEditProfile() {
@@ -1482,12 +1657,24 @@
             document.getElementById('rider-screen').classList.add('hidden');
             document.getElementById('main-app-shell').classList.remove('hidden');
 
-            document.getElementById('account-avatar').src = userProfile.photo || DEFAULT_AVATAR;
+            const avatar = userProfile.photo || DEFAULT_AVATAR;
+            document.getElementById('account-avatar').src = avatar;
             document.getElementById('account-name').textContent = userProfile.name;
             document.getElementById('account-phone').textContent = userProfile.phone;
             document.getElementById('account-address').textContent = `📍 ${userProfile.address || 'Hsipaw'}`;
 
-            navigateToScreen('home', false);
+            if (userProfile.address) {
+                const fAddr = document.getElementById('food-address');
+                const cAddr = document.getElementById('custom-address');
+                if (fAddr && !fAddr.value) fAddr.value = userProfile.address;
+                if (cAddr && !cAddr.value) cAddr.value = userProfile.address;
+            }
+
+            renderHomeShopsStrip();
+            renderHomeActiveOrder();
+            renderAdminHotlinesUI();
+            updateUnreadIndicators();
+            switchBottomTab('home');
         }
 
         function hideAllViews() {
@@ -1497,38 +1684,70 @@
         }
 
         function switchBottomTab(tab) {
-            navigateToScreen(tab, true);
-        }
+            hideAllViews();
+            document.getElementById('main-scroll-area').scrollTop = 0;
 
-        function highlightNav(id) {
-            ['nav-home', 'nav-activity', 'nav-map', 'nav-account'].forEach(navId => {
-                const el = document.getElementById(navId);
-                if (el) {
-                    el.classList.remove('text-[#FF5722]', 'font-bold');
-                    el.classList.add('text-slate-400', 'font-semibold');
-                }
+            ['nav-home', 'nav-activity', 'nav-map', 'nav-account'].forEach(id => {
+                const el = document.getElementById(id);
+                el.classList.remove('text-[#FF5722]', 'font-bold');
+                el.classList.add('text-slate-400', 'font-semibold');
             });
-            const activeEl = document.getElementById(id);
-            if (activeEl) {
-                activeEl.classList.remove('text-slate-400', 'font-semibold');
-                activeEl.classList.add('text-[#FF5722]', 'font-bold');
+
+            if (tab === 'home') {
+                document.getElementById('view-home').classList.remove('hidden');
+                highlightNav('nav-home');
+                renderHomeShopsStrip();
+                renderHomeActiveOrder();
+                renderAdminHotlinesUI();
+            } else if (tab === 'activity') {
+                document.getElementById('view-activity').classList.remove('hidden');
+                highlightNav('nav-activity');
+                renderUserActivity();
+            } else if (tab === 'map') {
+                document.getElementById('view-map').classList.remove('hidden');
+                highlightNav('nav-map');
+                refreshMainGoogleMapIframe();
+            } else if (tab === 'account') {
+                document.getElementById('view-account').classList.remove('hidden');
+                highlightNav('nav-account');
+                renderAdminHotlinesUI();
             }
         }
 
+        function highlightNav(id) {
+            const el = document.getElementById(id);
+            el.classList.remove('text-slate-400', 'font-semibold');
+            el.classList.add('text-[#FF5722]', 'font-bold');
+        }
+
         function openService(service) {
-            navigateToScreen(service, true);
+            hideAllViews();
+            document.getElementById('main-scroll-area').scrollTop = 0;
+            document.getElementById(`view-${service}`).classList.remove('hidden');
+            if (service === 'food') {
+                renderFoodShopBrowser();
+                renderFoodCart();
+            } else if (service === 'custom') {
+                updateCustomFeeDisplay();
+            } else if (service === 'bike') {
+                recalculateBikeFare();
+            }
         }
 
         function renderHomeShopsStrip() {
             const strip = document.getElementById('home-shops-strip');
-            if (!allShops.length) { strip.innerHTML = ""; return; }
+            if (!allShops.length) {
+                strip.innerHTML = `<p class="text-xs text-slate-400">No shops yet</p>`;
+                return;
+            }
             strip.innerHTML = allShops.map(shop => `
                 <button onclick="openFoodWithShop('${shop.id}')"
-                    class="bg-white border border-slate-200/80 rounded-2xl p-2.5 flex items-center gap-2.5 shrink-0 w-[215px] text-left shadow-2xs">
-                    <img src="${shop.photo || DEFAULT_SHOP_IMG}" class="w-12 h-12 rounded-xl object-cover bg-orange-50 shrink-0">
+                    class="bg-white border border-slate-200/80 rounded-2xl p-2.5 flex items-center gap-2.5 shrink-0 w-[215px] text-left shadow-2xs hover:border-orange-300 transition">
+                    <img src="${shop.photo || DEFAULT_SHOP_IMG}" class="w-12 h-12 rounded-xl object-cover bg-orange-50 shrink-0 border border-slate-100">
                     <div class="min-w-0">
                         <p class="text-xs font-extrabold text-slate-900 truncate">${escapeHtml(shop.name)}</p>
                         <p class="text-[10px] text-slate-500 truncate mt-0.5">📍 ${escapeHtml(shop.address)}</p>
+                        <span class="inline-block text-[10px] font-bold text-[#FF5722] mt-0.5">Menu (${(shop.items || []).length})</span>
                     </div>
                 </button>
             `).join('');
@@ -1542,136 +1761,301 @@
         function renderHomeActiveOrder() {
             const wrap = document.getElementById('home-active-order-wrap');
             const active = allOrders.find(o => o.status !== 'Delivered' && o.status !== 'Cancelled');
-            if (!active) { wrap.classList.add('hidden'); return; }
+            if (!active) {
+                wrap.classList.add('hidden');
+                return;
+            }
+            const unread = countUnreadForOrder(active, 'customer');
             wrap.classList.remove('hidden');
             wrap.innerHTML = `
                 <div class="bg-white rounded-2xl p-3.5 border border-orange-200 shadow-xs flex items-center justify-between gap-3">
                     <div class="min-w-0">
-                        <span class="text-[11px] font-extrabold text-[#FF5722]">Active Order • ${escapeHtml(active.status)}</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-[#FF5722] animate-pulse"></span>
+                            <span class="text-[11px] font-extrabold text-[#FF5722]">Active Order • ${escapeHtml(active.status)}</span>
+                        </div>
                         <p class="text-xs font-bold text-slate-900 truncate mt-0.5">${escapeHtml(active.details)}</p>
                     </div>
-                    <button onclick="openChatModal(${active.id}, 'customer')" class="px-3 py-2 rounded-xl bg-orange-100 text-[#FF5722] font-extrabold text-xs">💬 Chat</button>
+                    <button onclick="openChatModal(${active.id}, 'customer')"
+                        class="px-3 py-2 rounded-xl bg-orange-100 hover:bg-orange-200 text-[#FF5722] font-extrabold text-xs shrink-0 transition">
+                        💬 Chat ${unread > 0 ? `<span class="ml-1 px-1.5 py-0.2 bg-[#FF5722] text-white rounded-full text-[10px]">${unread}</span>` : ''}
+                    </button>
                 </div>
             `;
         }
 
         function renderFoodShopBrowser() {
+            const searchQuery = (document.getElementById('food-menu-search').value || '').trim().toLowerCase();
             document.getElementById('food-shop-count').textContent = `${allShops.length} Shops`;
             const pillsContainer = document.getElementById('food-shop-pills');
             const panelContainer = document.getElementById('food-selected-shop-panel');
 
-            if (!allShops.length) return;
-            if (!selectedShopId || !allShops.some(s => s.id === selectedShopId)) selectedShopId = allShops[0].id;
+            if (!allShops.length) {
+                pillsContainer.innerHTML = "";
+                panelContainer.innerHTML = `<p class="text-xs text-slate-400">No shops available</p>`;
+                return;
+            }
 
-            pillsContainer.innerHTML = allShops.map(shop => `
-                <button type="button" onclick="selectShopInFood('${shop.id}')"
-                    class="px-3.5 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap transition shrink-0 border ${
-                        shop.id === selectedShopId ? 'bg-[#FF5722] text-white border-[#FF5722]' : 'bg-white text-slate-700 border-slate-200'
-                    }">
-                    🏪 ${escapeHtml(shop.name)}
-                </button>
-            `).join('');
+            if (!selectedShopId || !allShops.some(s => s.id === selectedShopId)) {
+                selectedShopId = allShops[0].id;
+            }
+
+            if (searchQuery.length > 0) {
+                pillsContainer.innerHTML = `<span class="text-[11px] font-bold text-[#FF5722]">Search results:</span>`;
+                let matchedCards = [];
+                allShops.forEach(shop => {
+                    (shop.items || []).forEach(item => {
+                        if (item.name.toLowerCase().includes(searchQuery) || shop.name.toLowerCase().includes(searchQuery)) {
+                            matchedCards.push(buildMenuCardHtml(shop, item, true));
+                        }
+                    });
+                });
+                panelContainer.innerHTML = matchedCards.length ? `<div class="space-y-2">${matchedCards.join('')}</div>` : `<p class="text-xs text-slate-400 text-center py-4">No matching items</p>`;
+                return;
+            }
+
+            pillsContainer.innerHTML = allShops.map(shop => {
+                const isSelected = shop.id === selectedShopId;
+                return `
+                    <button type="button" onclick="selectShopInFood('${shop.id}')"
+                        class="px-3.5 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap transition shrink-0 border ${
+                            isSelected ? 'bg-[#FF5722] text-white border-[#FF5722] shadow-2xs' : 'bg-white text-slate-700 border-slate-200 hover:border-orange-300'
+                        }">
+                        🏪 ${escapeHtml(shop.name)}
+                    </button>
+                `;
+            }).join('');
 
             const activeShop = allShops.find(s => s.id === selectedShopId);
             if (!activeShop) return;
 
+            const menuCards = (activeShop.items || []).map(item => buildMenuCardHtml(activeShop, item, false)).join('');
+
             panelContainer.innerHTML = `
-                <div class="bg-white p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between">
-                    <h3 class="text-xs font-extrabold text-slate-900">${escapeHtml(activeShop.name)}</h3>
-                    <a href="tel:${activeShop.phone}" class="px-2.5 py-1.5 rounded-xl bg-slate-100 text-slate-800 font-bold text-[11px]">📞 Call</a>
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <img src="${activeShop.photo || DEFAULT_SHOP_IMG}" class="w-11 h-11 rounded-xl object-cover bg-orange-50 shrink-0">
+                        <div class="min-w-0">
+                            <h3 class="text-xs font-extrabold text-slate-900 truncate">${escapeHtml(activeShop.name)}</h3>
+                            <p class="text-[11px] text-slate-500 truncate">📍 ${escapeHtml(activeShop.address)}</p>
+                        </div>
+                    </div>
+                    <a href="tel:${activeShop.phone}" class="px-2.5 py-1.5 rounded-xl bg-slate-100 text-slate-800 font-bold text-[11px] shrink-0">📞 Call</a>
                 </div>
                 <div class="space-y-2">
-                    ${(activeShop.items || []).map(item => `
-                        <div class="bg-white p-3 rounded-2xl border border-slate-200 flex items-center justify-between gap-3">
-                            <div class="min-w-0">
-                                <h4 class="text-xs font-extrabold text-slate-900 truncate">${escapeHtml(item.name)}</h4>
-                                <p class="text-xs font-extrabold text-[#FF5722]">${Number(item.priceNum || 0).toLocaleString()} Ks</p>
-                            </div>
-                            <button type="button" onclick="addItemToFoodCart('${activeShop.id}', '${item.id}')" class="px-3.5 py-2 rounded-xl bg-orange-100 text-[#FF5722] font-extrabold text-xs">+ Add</button>
-                        </div>
-                    `).join('')}
+                    ${menuCards || `<p class="text-xs text-slate-400 text-center py-3">No items posted</p>`}
                 </div>
             `;
         }
 
-        function selectShopInFood(shopId) { selectedShopId = shopId; renderFoodShopBrowser(); }
+        function buildMenuCardHtml(shop, item, showShopBadge) {
+            const priceVal = Number(item.priceNum || parseInt(String(item.price).replace(/[^0-9]/g, ''), 10) || 0);
+            return `
+                <div class="bg-white p-3 rounded-2xl border border-slate-200/80 shadow-2xs flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <img src="${item.photo || DEFAULT_SHOP_IMG}" class="w-14 h-14 rounded-xl object-cover bg-orange-50 border border-slate-100 shrink-0">
+                        <div class="min-w-0">
+                            ${showShopBadge ? `<span class="text-[10px] font-bold text-slate-400 block truncate">🏪 ${escapeHtml(shop.name)}</span>` : ''}
+                            <h4 class="text-xs font-extrabold text-slate-900 truncate">${escapeHtml(item.name)}</h4>
+                            <p class="text-xs font-extrabold text-[#FF5722] mt-0.5">${priceVal.toLocaleString()} Ks</p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="addItemToFoodCart('${shop.id}', '${item.id}')"
+                        class="px-3.5 py-2 rounded-xl bg-orange-100 hover:bg-orange-200 active:scale-95 text-[#FF5722] font-extrabold text-xs shrink-0 transition">
+                        + Add
+                    </button>
+                </div>
+            `;
+        }
+
+        function selectShopInFood(shopId) {
+            selectedShopId = shopId;
+            renderFoodShopBrowser();
+        }
 
         function addItemToFoodCart(shopId, itemId) {
             const shop = allShops.find(s => s.id === shopId);
-            const item = shop.items.find(i => i.id === itemId);
+            if (!shop) return;
+            const item = (shop.items || []).find(i => i.id === itemId);
+            if (!item) return;
+
+            const priceVal = Number(item.priceNum || parseInt(String(item.price).replace(/[^0-9]/g, ''), 10) || 0);
             const existing = foodCart.find(c => c.shopId === shopId && c.itemId === itemId);
+
             if (existing) existing.qty += 1;
-            else foodCart.push({ shopId: shop.id, shopName: shop.name, itemId: item.id, itemName: item.name, price: item.priceNum, qty: 1 });
+            else foodCart.push({ shopId: shop.id, shopName: shop.name, itemId: item.id, itemName: item.name, price: priceVal, qty: 1 });
+
             renderFoodCart();
-            showToast(`Added ${item.name}`);
+            showToast(`Added ${item.name} to basket`);
         }
 
         function changeCartQty(index, delta) {
+            if (!foodCart[index]) return;
             foodCart[index].qty += delta;
             if (foodCart[index].qty <= 0) foodCart.splice(index, 1);
             renderFoodCart();
         }
 
+        function computeOrderDeliveryFee(addressText, distinctShopCount) {
+            const addr = (addressText || '').toLowerCase();
+            const outerKeywords = ["san phet", "tonsint", "zawtsu", "htaung", "စံဖိတ်", "တုံစင့်", "ဇာတ်စု", "ထောင်ကြီး"];
+            
+            let fee = Number(appConfig.orderTown);
+            if (outerKeywords.some(k => addr.includes(k))) {
+                fee = Number(appConfig.orderOuter);
+            }
+            if (distinctShopCount > 1) {
+                fee += (distinctShopCount - 1) * Number(appConfig.orderExtraStop);
+            }
+            return fee;
+        }
+
         function renderFoodCart() {
             const listEl = document.getElementById('food-cart-list');
             const summaryEl = document.getElementById('food-cart-summary');
+            const badgeEl = document.getElementById('cart-shop-badge');
+
             if (foodCart.length === 0) {
-                listEl.innerHTML = `<p class="text-xs text-slate-400 text-center py-4 bg-slate-50 rounded-xl">Cart is empty</p>`;
+                listEl.innerHTML = `<p class="text-xs text-slate-400 text-center py-4 bg-slate-50 rounded-xl border border-dashed border-slate-200">Cart is empty</p>`;
                 summaryEl.classList.add('hidden');
+                badgeEl.classList.add('hidden');
                 return;
             }
+
+            const uniqueShops = [...new Set(foodCart.map(c => c.shopName))];
+            badgeEl.classList.remove('hidden');
+            badgeEl.textContent = uniqueShops.length > 1 ? `${uniqueShops.length} Shops Combined` : `1 Shop`;
+
             listEl.innerHTML = foodCart.map((c, idx) => `
-                <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border">
-                    <div class="min-w-0"><p class="text-xs font-extrabold">${escapeHtml(c.itemName)} x${c.qty}</p></div>
-                    <div class="flex items-center gap-2">
-                        <button type="button" onclick="changeCartQty(${idx}, -1)" class="w-7 h-7 bg-white border font-bold">-</button>
-                        <span class="text-xs font-extrabold">${c.qty}</span>
-                        <button type="button" onclick="changeCartQty(${idx}, 1)" class="w-7 h-7 bg-[#FF5722] text-white font-extrabold">+</button>
+                <div class="flex items-center justify-between gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
+                    <div class="min-w-0">
+                        <p class="text-[10px] font-bold text-slate-400 truncate">🏪 ${escapeHtml(c.shopName)}</p>
+                        <p class="text-xs font-extrabold text-slate-900 truncate">${escapeHtml(c.itemName)}</p>
+                        <p class="text-[11px] font-bold text-[#FF5722]">${(c.price * c.qty).toLocaleString()} Ks</p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button type="button" onclick="changeCartQty(${idx}, -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-300 font-extrabold text-slate-700">-</button>
+                        <span class="text-xs font-extrabold w-4 text-center">${c.qty}</span>
+                        <button type="button" onclick="changeCartQty(${idx}, 1)" class="w-7 h-7 rounded-lg bg-[#FF5722] text-white font-extrabold">+</button>
                     </div>
                 </div>
             `).join('');
+
             summaryEl.classList.remove('hidden');
             recalculateFoodCartTotals();
         }
 
         function recalculateFoodCartTotals() {
+            if (foodCart.length === 0) return;
+            const addr = document.getElementById('food-address').value;
+            const uniqueShops = [...new Set(foodCart.map(c => c.shopName))];
             const itemsTotal = foodCart.reduce((sum, c) => sum + (c.price * c.qty), 0);
+            const delivFee = computeOrderDeliveryFee(addr, uniqueShops.length);
+
             document.getElementById('cart-items-total').textContent = `${itemsTotal.toLocaleString()} Ks`;
-            document.getElementById('cart-grand-total').textContent = `${(itemsTotal + 2000).toLocaleString()} Ks`;
+            document.getElementById('cart-deliv-fee').textContent = `${delivFee.toLocaleString()} Ks`;
+            document.getElementById('cart-grand-total').textContent = `${(itemsTotal + delivFee).toLocaleString()} Ks`;
         }
 
-        function captureFoodLocation() { foodCoords = { lat: HSIPAW_LAT, lng: HSIPAW_LNG }; showToast("GPS attached"); }
+        function captureFoodLocation() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => { foodCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude }; showToast("GPS attached"); },
+                    () => { foodCoords = { lat: HSIPAW_LAT, lng: HSIPAW_LNG }; }
+                );
+            }
+        }
 
         function submitFoodOrder(e) {
             e.preventDefault();
+            if (foodCart.length === 0) return;
             const address = document.getElementById('food-address').value.trim();
-            if (!address || foodCart.length === 0) return;
+            if (!address) return;
+
+            const uniqueShops = [...new Set(foodCart.map(c => c.shopName))];
             const itemsTotal = foodCart.reduce((sum, c) => sum + (c.price * c.qty), 0);
-            allOrders.unshift({
-                id: Date.now(), type: 'food', customerName: userProfile.name, customerPhone: userProfile.phone,
-                customerPhoto: userProfile.photo || DEFAULT_AVATAR, details: foodCart.map(c => `${c.itemName} x${c.qty}`).join(', '),
-                dropoffAddress: address, dropoffLat: HSIPAW_LAT, dropoffLng: HSIPAW_LNG,
-                fareText: `Total: ${(itemsTotal + 2000).toLocaleString()} Ks`, status: 'Pending', messages: []
-            });
+            const delivFee = computeOrderDeliveryFee(address, uniqueShops.length);
+            const summaryLines = foodCart.map(c => `[${c.shopName}] ${c.itemName} x${c.qty} (${(c.price * c.qty).toLocaleString()} Ks)`).join('\n');
+
+            const newOrder = {
+                id: Date.now(),
+                type: 'food',
+                customerName: userProfile.name,
+                customerPhone: userProfile.phone,
+                customerPhoto: userProfile.photo || DEFAULT_AVATAR,
+                details: summaryLines,
+                pickupAddress: uniqueShops.join(' + '),
+                dropoffAddress: address,
+                pickupLat: HSIPAW_LAT,
+                pickupLng: HSIPAW_LNG,
+                dropoffLat: foodCoords ? foodCoords.lat : HSIPAW_LAT,
+                dropoffLng: foodCoords ? foodCoords.lng : HSIPAW_LNG,
+                fareText: `Deliv: ${delivFee.toLocaleString()} Ks | Total: ${(itemsTotal + delivFee).toLocaleString()} Ks`,
+                status: 'Pending',
+                assignedRiderId: null,
+                assignedRiderName: null,
+                assignedRiderPhone: null,
+                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                messages: []
+            };
+
+            allOrders.unshift(newOrder);
             saveOrders();
             foodCart = [];
             renderFoodCart();
+            showToast("Unified Food Order placed!");
             switchBottomTab('activity');
         }
 
-        function updateCustomFeeDisplay() {}
-        function captureCustomLocation() {}
+        function updateCustomFeeDisplay() {
+            const addr = document.getElementById('custom-address').value;
+            const fee = computeOrderDeliveryFee(addr, 1);
+            document.getElementById('custom-fee-display').textContent = `${fee.toLocaleString()} Ks + Receipt`;
+        }
+
+        function captureCustomLocation() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => { customCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude }; showToast("GPS attached"); },
+                    () => { customCoords = { lat: HSIPAW_LAT, lng: HSIPAW_LNG }; }
+                );
+            }
+        }
+
         function submitCustomOrder(e) {
             e.preventDefault();
+            const shop = document.getElementById('custom-shop-name').value.trim() || "Custom Store";
             const items = document.getElementById('custom-items').value.trim();
             const address = document.getElementById('custom-address').value.trim();
             if (!items || !address) return;
-            allOrders.unshift({
-                id: Date.now(), type: 'custom', customerName: userProfile.name, customerPhone: userProfile.phone,
-                customerPhoto: userProfile.photo || DEFAULT_AVATAR, details: items, dropoffAddress: address,
-                fareText: `Deliv: 2,000 Ks + Receipt`, status: 'Pending', messages: []
-            });
+
+            const fee = computeOrderDeliveryFee(address, 1);
+            const newOrder = {
+                id: Date.now(),
+                type: 'custom',
+                customerName: userProfile.name,
+                customerPhone: userProfile.phone,
+                customerPhoto: userProfile.photo || DEFAULT_AVATAR,
+                details: `[Custom Buy - ${shop}]\n${items}`,
+                pickupAddress: shop,
+                dropoffAddress: address,
+                pickupLat: HSIPAW_LAT,
+                pickupLng: HSIPAW_LNG,
+                dropoffLat: customCoords ? customCoords.lat : HSIPAW_LAT,
+                dropoffLng: customCoords ? customCoords.lng : HSIPAW_LNG,
+                fareText: `Deliv Fee: ${fee.toLocaleString()} Ks + Receipt`,
+                status: 'Pending',
+                assignedRiderId: null,
+                assignedRiderName: null,
+                assignedRiderPhone: null,
+                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                messages: []
+            };
+
+            allOrders.unshift(newOrder);
             saveOrders();
+            e.target.reset();
+            showToast("Custom order submitted!");
             switchBottomTab('activity');
         }
 
@@ -1680,102 +2064,782 @@
             if (!list) return;
             list.innerHTML = HSIPAW_PLACES.map(p => `
                 <button type="button" onclick="applyGrabSuggestedPlace('${escapeAttr(p.name)}', ${p.lat}, ${p.lng})"
-                    class="w-full px-4 py-3 flex items-start gap-3 text-left hover:bg-slate-50">
-                    <span class="text-xs font-bold text-slate-900">${escapeHtml(p.name)}</span>
+                    class="w-full px-4 py-3 flex items-start gap-3 text-left hover:bg-slate-50 transition">
+                    <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs shrink-0 mt-0.5">🕒</span>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-xs font-bold text-slate-900 truncate">${escapeHtml(p.name)}</p>
+                        <p class="text-[11px] text-slate-500 truncate">${escapeHtml(p.sub)}</p>
+                    </div>
                 </button>
             `).join('');
         }
 
         function applyGrabSuggestedPlace(name, lat, lng) {
-            document.getElementById('bike-dropoff').value = name;
-            bikeDropoffCoords = { lat, lng };
+            if (activeBikeField === 'pickup') {
+                document.getElementById('bike-pickup').value = name;
+                bikePickupCoords = { lat, lng };
+                activeBikeField = 'dropoff';
+                document.getElementById('bike-dropoff').focus();
+            } else {
+                document.getElementById('bike-dropoff').value = name;
+                bikeDropoffCoords = { lat, lng };
+            }
             recalculateBikeFare();
         }
 
-        function captureBikePickupGPS() { document.getElementById('bike-pickup').value = "Current Location"; }
+        function captureBikePickupGPS() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        bikePickupCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+                        document.getElementById('bike-pickup').value = `Current Location (${bikePickupCoords.lat.toFixed(4)}, ${bikePickupCoords.lng.toFixed(4)})`;
+                        activeBikeField = 'dropoff';
+                        recalculateBikeFare();
+                    },
+                    () => {
+                        bikePickupCoords = { lat: HSIPAW_LAT, lng: HSIPAW_LNG };
+                        document.getElementById('bike-pickup').value = "Hsipaw Town Center";
+                    }
+                );
+            }
+        }
+
         function openGoogleMapPicker(target) {
             currentPickerTarget = target;
-            const m = document.getElementById('gmap-picker-modal');
-            m.classList.remove('hidden'); m.classList.add('flex');
-            document.getElementById('picker-google-map-iframe').src = `https://maps.google.com/maps?q=${HSIPAW_LAT},${HSIPAW_LNG}&t=k&z=16&output=embed`;
+            tempPickedLabel = '';
+            document.getElementById('gmap-picker-title').textContent = target === 'pickup' ? "🛰️ Grab Pin: Set Pickup Location" : "🛰️ Grab Pin: Set Drop-off Destination";
+            const modal = document.getElementById('gmap-picker-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            updatePickerSatelliteMap(HSIPAW_LAT, HSIPAW_LNG);
         }
-        function closeGoogleMapPicker() { document.getElementById('gmap-picker-modal').classList.add('hidden'); document.getElementById('gmap-picker-modal').classList.remove('flex'); }
-        function useLiveGpsInPicker() {}
+
+        function updatePickerSatelliteMap(lat, lng) {
+            tempPickedLat = lat;
+            tempPickedLng = lng;
+            document.getElementById('picker-coords-display').textContent = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+            document.getElementById('picker-google-map-iframe').src = `https://maps.google.com/maps?q=${lat},${lng}&t=k&z=16&output=embed`;
+        }
+
+        function selectHsipawLandmark(lat, lng, label) {
+            tempPickedLabel = label;
+            updatePickerSatelliteMap(lat, lng);
+        }
+
+        function useLiveGpsInPicker() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => updatePickerSatelliteMap(pos.coords.latitude, pos.coords.longitude),
+                    () => updatePickerSatelliteMap(HSIPAW_LAT, HSIPAW_LNG)
+                );
+            }
+        }
+
+        function closeGoogleMapPicker() {
+            const modal = document.getElementById('gmap-picker-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
         function confirmGoogleMapPickerSelection() {
-            document.getElementById('bike-dropoff').value = "Grab Map Pin";
+            const coordStr = `${tempPickedLat.toFixed(4)}, ${tempPickedLng.toFixed(4)}`;
+            const label = tempPickedLabel || `Grab Map Pin (${coordStr})`;
+            if (currentPickerTarget === 'pickup') {
+                bikePickupCoords = { lat: tempPickedLat, lng: tempPickedLng };
+                document.getElementById('bike-pickup').value = label;
+            } else {
+                bikeDropoffCoords = { lat: tempPickedLat, lng: tempPickedLng };
+                document.getElementById('bike-dropoff').value = label;
+            }
+            recalculateBikeFare();
             closeGoogleMapPicker();
         }
-        function recalculateBikeFare() { document.getElementById('bike-fare-display').textContent = `4,000 Ks`; }
+
+        function recalculateBikeFare() {
+            const dropoffText = document.getElementById('bike-dropoff').value.toLowerCase();
+            const bawgyoKeywords = ["bawgyo", "ဘော်ကြို"];
+            const outerKeywords = ["san phet", "tonsint", "zawtsu", "htaung", "စံဖိတ်", "တုံစင့်", "ဇာတ်စု", "ထောင်ကြီး"];
+
+            let fare = Number(appConfig.bikeTown);
+            let zoneLabel = "Town Base Zone";
+
+            if (bawgyoKeywords.some(w => dropoffText.includes(w))) {
+                fare = Number(appConfig.bikeBawgyo);
+                zoneLabel = "Bawgyo Zone";
+            } else if (outerKeywords.some(w => dropoffText.includes(w))) {
+                fare = Number(appConfig.bikeOuter);
+                zoneLabel = "Outer Zone";
+            }
+
+            document.getElementById('bike-zone-label').textContent = zoneLabel;
+            document.getElementById('bike-fare-display').textContent = `${fare.toLocaleString()} Ks`;
+        }
 
         function submitBikeOrder(e) {
             e.preventDefault();
             const pickup = document.getElementById('bike-pickup').value.trim();
             const dropoff = document.getElementById('bike-dropoff').value.trim();
-            allOrders.unshift({
-                id: Date.now(), type: 'bike', customerName: userProfile.name, customerPhone: userProfile.phone,
-                customerPhoto: userProfile.photo || DEFAULT_AVATAR, details: 'Bike Taxi Ride Request',
-                pickupAddress: pickup, dropoffAddress: dropoff, fareText: '4,000 Ks', status: 'Pending', messages: []
-            });
+            const fareText = document.getElementById('bike-fare-display').textContent;
+
+            const newRide = {
+                id: Date.now(),
+                type: 'bike',
+                customerName: userProfile.name,
+                customerPhone: userProfile.phone,
+                customerPhoto: userProfile.photo || DEFAULT_AVATAR,
+                details: 'Bike Taxi Ride Request (Grab Pin)',
+                pickupAddress: pickup,
+                dropoffAddress: dropoff,
+                pickupLat: bikePickupCoords ? bikePickupCoords.lat : HSIPAW_LAT,
+                pickupLng: bikePickupCoords ? bikePickupCoords.lng : HSIPAW_LNG,
+                dropoffLat: bikeDropoffCoords ? bikeDropoffCoords.lat : HSIPAW_LAT,
+                dropoffLng: bikeDropoffCoords ? bikeDropoffCoords.lng : HSIPAW_LNG,
+                fareText: fareText,
+                status: 'Pending',
+                assignedRiderId: null,
+                assignedRiderName: null,
+                assignedRiderPhone: null,
+                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                messages: []
+            };
+
+            allOrders.unshift(newRide);
             saveOrders();
+            e.target.reset();
+            showToast("Bike Taxi requested via Grab Pin!");
             switchBottomTab('activity');
         }
 
         function cancelOrderByCustomer(orderId) {
-            const order = allOrders.find(o => o.id === orderId);
-            if (order && order.status === 'Pending') { order.status = 'Cancelled'; saveOrders(); renderUserActivity(); }
+            const idx = allOrders.findIndex(o => o.id === orderId);
+            if (idx === -1) return;
+            if (allOrders[idx].status !== 'Pending' || allOrders[idx].assignedRiderId) {
+                showToast("Cannot cancel: Rider has already accepted!");
+                renderUserActivity();
+                return;
+            }
+            allOrders[idx].status = 'Cancelled';
+            saveOrders();
+            renderUserActivity();
+            showToast("Order cancelled");
         }
 
         function renderUserActivity() {
             const container = document.getElementById('user-activity-list');
-            if (allOrders.length === 0) { container.innerHTML = `<p class="text-center text-xs text-slate-400 py-12">No orders</p>`; return; }
-            container.innerHTML = allOrders.map(item => `
-                <div class="bg-white p-4 rounded-2xl border space-y-3">
-                    <div class="flex justify-between"><span class="text-xs font-extrabold text-[#FF5722]">${escapeHtml(item.type)}</span><span class="text-xs font-bold">${escapeHtml(item.status)}</span></div>
-                    <p class="text-xs font-extrabold whitespace-pre-line">${escapeHtml(item.details)}</p>
-                    <div class="flex justify-between items-center pt-2 border-t">
-                        <span class="text-xs font-extrabold text-[#FF5722]">${escapeHtml(item.fareText)}</span>
-                        ${item.status === 'Pending' ? `<button onclick="cancelOrderByCustomer(${item.id})" class="px-3 py-1.5 bg-red-50 text-red-600 rounded-xl text-xs font-bold">Cancel</button>` : ''}
+            container.innerHTML = "";
+
+            if (allOrders.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 space-y-2"><div class="text-4xl">📭</div><p class="text-sm font-bold text-slate-600">No orders yet</p></div>`;
+                return;
+            }
+
+            allOrders.forEach(item => {
+                const isBike = item.type === 'bike';
+                const badge = isBike
+                    ? `<span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold">🏍️ Bike Taxi</span>`
+                    : item.type === 'custom'
+                    ? `<span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">🛍️ Custom Buy</span>`
+                    : `<span class="px-2.5 py-0.5 rounded-full bg-orange-100 text-[#FF5722] text-[11px] font-bold">🍜 Food Order</span>`;
+
+                let statusStyle = "bg-slate-100 text-slate-700";
+                if (item.status === 'Accepted' || item.status === 'On the way') statusStyle = "bg-blue-100 text-blue-800";
+                else if (item.status === 'Delivered') statusStyle = "bg-emerald-100 text-emerald-800";
+                else if (item.status === 'Cancelled') statusStyle = "bg-red-100 text-red-700";
+
+                const canCancel = (item.status === 'Pending' && !item.assignedRiderId);
+                const unread = countUnreadForOrder(item, 'customer');
+
+                const riderInfoHtml = item.assignedRiderName
+                    ? `<p class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg mt-2">🛵 Rider: ${escapeHtml(item.assignedRiderName)} (${escapeHtml(item.assignedRiderPhone || '')})</p>`
+                    : '';
+
+                const cancelBtnHtml = canCancel
+                    ? `<button onclick="cancelOrderByCustomer(${item.id})" class="px-3 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs">Cancel Order</button>`
+                    : (item.status !== 'Delivered' && item.status !== 'Cancelled')
+                    ? `<span class="text-[10px] font-bold text-slate-400">🔒 In progress</span>`
+                    : '';
+
+                const card = `
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-3">
+                        <div class="flex items-center justify-between">${badge}<span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold ${statusStyle}">${escapeHtml(item.status)}</span></div>
+                        <div>
+                            <p class="text-xs font-extrabold text-slate-900 whitespace-pre-line">${escapeHtml(item.details)}</p>
+                            <p class="text-[11px] text-slate-500 mt-1">📍 ${escapeHtml(item.dropoffAddress)}</p>
+                            ${riderInfoHtml}
+                        </div>
+                        <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2 flex-wrap">
+                            <div><span class="text-[10px] text-slate-400 block">${item.createdAt || ''}</span><span class="text-xs font-extrabold text-[#FF5722]">${escapeHtml(item.fareText)}</span></div>
+                            <div class="flex items-center gap-2">
+                                ${cancelBtnHtml}
+                                <button onclick="openChatModal(${item.id}, 'customer')" class="px-3.5 py-2 rounded-xl bg-[#FF5722] text-white font-bold text-xs flex items-center gap-1">
+                                    <span>💬 Chat</span> ${unread > 0 ? `<span class="px-1.5 py-0.2 bg-white text-[#FF5722] rounded-full text-[10px] font-extrabold">${unread}</span>` : ''}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', card);
+            });
+        }
+
+        function openRiderPortalGate() {
+            if (myRiderSession && myRiderSession.pinVerified) { enterRiderPortalScreen(); return; }
+            document.getElementById('rider-pin-input').value = "";
+            document.getElementById('rider-pin-error').classList.add('hidden');
+            const m = document.getElementById('rider-pin-modal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+            setTimeout(() => document.getElementById('rider-pin-input').focus(), 100);
+        }
+
+        function closeRiderPinModal() {
+            document.getElementById('rider-pin-modal').classList.add('hidden');
+            document.getElementById('rider-pin-modal').classList.remove('flex');
+        }
+
+        function verifyRiderPin() {
+            if (document.getElementById('rider-pin-input').value.trim() === RIDER_SECRET_PIN) {
+                myRiderSession = { pinVerified: true, riderId: null };
+                localStorage.setItem(MY_RIDER_SESSION_KEY, JSON.stringify(myRiderSession));
+                closeRiderPinModal();
+                enterRiderPortalScreen();
+            } else {
+                document.getElementById('rider-pin-error').classList.remove('hidden');
+            }
+        }
+
+        function enterRiderPortalScreen() {
+            document.getElementById('terms-screen').classList.add('hidden');
+            document.getElementById('register-screen').classList.add('hidden');
+            document.getElementById('main-app-shell').classList.add('hidden');
+            document.getElementById('admin-screen').classList.add('hidden');
+            document.getElementById('rider-screen').classList.remove('hidden');
+            renderRiderPortalState();
+        }
+
+        function exitRiderPortal() { enterMainApp(); }
+
+        function submitRiderApplication(e) {
+            e.preventDefault();
+            const name = document.getElementById('rider-app-name').value.trim();
+            const phone = document.getElementById('rider-app-phone').value.trim();
+            if (!name || !phone) return;
+
+            const newRider = { id: 'rider_' + Date.now(), name, phone, approved: false, joinedAt: new Date().toLocaleDateString() };
+            allRiders.unshift(newRider);
+            saveRiders();
+            myRiderSession = { pinVerified: true, riderId: newRider.id };
+            localStorage.setItem(MY_RIDER_SESSION_KEY, JSON.stringify(myRiderSession));
+            renderRiderPortalState();
+            showToast("Application sent to Admin");
+        }
+
+        function checkRiderApprovalStatus() {
+            allRiders = JSON.parse(localStorage.getItem(RIDERS_STORAGE_KEY)) || [];
+            renderRiderPortalState();
+            showToast("Checked approval status");
+        }
+
+        function renderRiderPortalState() {
+            const regBox = document.getElementById('rider-register-box');
+            const pendBox = document.getElementById('rider-pending-box');
+            const boardBox = document.getElementById('rider-board-box');
+
+            regBox.classList.add('hidden');
+            pendBox.classList.add('hidden');
+            boardBox.classList.add('hidden');
+
+            const me = myRiderSession && myRiderSession.riderId ? allRiders.find(r => r.id === myRiderSession.riderId) : null;
+            if (!me) { regBox.classList.remove('hidden'); return; }
+
+            document.getElementById('rider-header-sub').textContent = `${me.name} • ${me.phone}`;
+            if (!me.approved) { pendBox.classList.remove('hidden'); return; }
+
+            boardBox.classList.remove('hidden');
+            renderRiderDispatchBoard(me);
+        }
+
+        function renderRiderDispatchBoard(me) {
+            const myActive = allOrders.filter(o => o.assignedRiderId === me.id && o.status !== 'Delivered' && o.status !== 'Cancelled');
+            const myWrap = document.getElementById('rider-my-active-wrap');
+
+            if (myActive.length > 0) {
+                myWrap.innerHTML = `<h2 class="text-xs font-extrabold text-emerald-800 uppercase tracking-wider">My Active Deliveries (${myActive.length})</h2>` +
+                myActive.map(order => `
+                    <div class="bg-white p-4 rounded-2xl border-2 border-emerald-500 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between"><span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-extrabold">${escapeHtml(order.status)}</span><span class="text-xs font-extrabold text-slate-900">${escapeHtml(order.fareText)}</span></div>
+                        <div>
+                            <p class="text-sm font-extrabold text-slate-900">${escapeHtml(order.customerName)} (${escapeHtml(order.customerPhone)})</p>
+                            <p class="text-xs text-slate-700 whitespace-pre-line mt-1">${escapeHtml(order.details)}</p>
+                            <p class="text-xs text-slate-500 mt-1">📍 Drop-off: ${escapeHtml(order.dropoffAddress)}</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="https://maps.google.com/maps?q=${order.dropoffLat},${order.dropoffLng}&t=k" target="_blank" class="py-2.5 rounded-xl bg-blue-50 text-blue-700 font-bold text-xs text-center">🛰️ Map</a>
+                            <button onclick="openChatModal(${order.id}, 'admin')" class="py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs">💬 Chat</button>
+                        </div>
+                        <button onclick="completeOrderByRider(${order.id})" class="w-full py-3 rounded-xl bg-emerald-600 text-white font-extrabold text-xs">✅ Mark Delivered & Complete</button>
+                    </div>
+                `).join('');
+            } else { myWrap.innerHTML = ''; }
+
+            const availablePool = allOrders.filter(o => o.status === 'Pending' && !o.assignedRiderId);
+            document.getElementById('rider-pool-count').textContent = availablePool.length;
+            const availList = document.getElementById('rider-available-list');
+
+            if (availablePool.length === 0) {
+                availList.innerHTML = `<p class="text-center text-xs text-slate-400 py-8 bg-white rounded-2xl border border-slate-200">No unclaimed orders</p>`;
+                return;
+            }
+
+            availList.innerHTML = availablePool.map(order => `
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+                    <div class="flex items-center justify-between"><span class="text-xs font-extrabold text-[#FF5722] uppercase">${escapeHtml(order.type)}</span><span class="text-xs font-extrabold text-slate-900">${escapeHtml(order.fareText)}</span></div>
+                    <div>
+                        <p class="text-xs font-extrabold text-slate-900 whitespace-pre-line">${escapeHtml(order.details)}</p>
+                        <p class="text-[11px] text-slate-500 mt-1">From: ${escapeHtml(order.pickupAddress)}</p>
+                        <p class="text-[11px] text-slate-500">To: ${escapeHtml(order.dropoffAddress)}</p>
+                    </div>
+                    <button onclick="claimOrderByRider(${order.id})" class="w-full py-3 rounded-xl bg-[#FF5722] text-white font-extrabold text-xs shadow-xs">🛵 Accept & Claim Order</button>
+                </div>
+            `).join('');
+        }
+
+        function claimOrderByRider(orderId) {
+            allOrders = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY)) || [];
+            const order = allOrders.find(o => o.id === orderId);
+            const me = allRiders.find(r => r.id === myRiderSession.riderId);
+            if (!order || !me) return;
+            if (order.assignedRiderId || order.status !== 'Pending') { showToast("Another rider claimed this order."); renderRiderPortalState(); return; }
+
+            order.assignedRiderId = me.id;
+            order.assignedRiderName = me.name;
+            order.assignedRiderPhone = me.phone;
+            order.status = 'Accepted';
+            saveOrders();
+            renderRiderPortalState();
+            showToast("Order claimed!");
+        }
+
+        function completeOrderByRider(orderId) {
+            const order = allOrders.find(o => o.id === orderId);
+            if (!order) return;
+            order.status = 'Delivered';
+            order.completedAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            saveOrders();
+            renderRiderPortalState();
+            showToast("Order delivered!");
+        }
+
+        function openPinModal() {
+            document.getElementById('pin-input').value = "";
+            document.getElementById('pin-error').classList.add('hidden');
+            const m = document.getElementById('pin-modal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+            setTimeout(() => document.getElementById('pin-input').focus(), 100);
+        }
+
+        function closePinModal() {
+            document.getElementById('pin-modal').classList.add('hidden');
+            document.getElementById('pin-modal').classList.remove('flex');
+        }
+
+        function verifyPin() {
+            if (document.getElementById('pin-input').value.trim() === ADMIN_SECRET_PIN) {
+                closePinModal();
+                showAdminScreen();
+            } else { document.getElementById('pin-error').classList.remove('hidden'); }
+        }
+
+        function showAdminScreen() {
+            document.getElementById('terms-screen').classList.add('hidden');
+            document.getElementById('register-screen').classList.add('hidden');
+            document.getElementById('main-app-shell').classList.add('hidden');
+            document.getElementById('rider-screen').classList.add('hidden');
+            document.getElementById('admin-screen').classList.remove('hidden');
+            switchAdminTab('orders');
+        }
+
+        function exitAdmin() { enterMainApp(); }
+
+        function switchAdminTab(tab) {
+            ['admin-view-orders', 'admin-view-staff', 'admin-view-hotlines', 'admin-view-rates'].forEach(id => document.getElementById(id).classList.add('hidden'));
+            ['adm-tab-orders', 'adm-tab-staff', 'adm-tab-hotlines', 'adm-tab-rates'].forEach(id => {
+                document.getElementById(id).className = "px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 whitespace-nowrap text-xs font-bold";
+            });
+
+            document.getElementById(`admin-view-${tab}`).classList.remove('hidden');
+            document.getElementById(`adm-tab-${tab}`).className = "px-3 py-1.5 rounded-lg bg-slate-900 text-white whitespace-nowrap text-xs font-bold";
+
+            if (tab === 'orders') renderAdminOrders();
+            else if (tab === 'staff') renderAdminStaffList();
+            else if (tab === 'hotlines') renderAdminHotlinesUI();
+            else if (tab === 'rates') populateAdminConfigForm();
+        }
+
+        function renderAdminOrders() {
+            const activeOrders = allOrders.filter(o => o.status !== 'Delivered' && o.status !== 'Cancelled');
+            document.getElementById('admin-count').textContent = activeOrders.length;
+            document.getElementById('admin-staff-pending-badge').textContent = allRiders.filter(r => !r.approved).length;
+
+            const container = document.getElementById('admin-orders-container');
+            if (allOrders.length === 0) { container.innerHTML = `<p class="text-center text-slate-400 text-sm py-12">No orders</p>`; return; }
+
+            container.innerHTML = allOrders.map((order, idx) => {
+                const riderTag = order.assignedRiderName
+                    ? `<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 font-extrabold text-[11px]">🛵 Rider: ${escapeHtml(order.assignedRiderName)}</span>`
+                    : `<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 font-bold text-[11px]">⏳ Unassigned</span>`;
+
+                return `
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+                        <div class="flex items-center justify-between gap-2 flex-wrap">${riderTag}<span class="text-xs font-extrabold text-slate-900 bg-slate-100 px-2.5 py-1 rounded-lg">${escapeHtml(order.status)}</span></div>
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <img src="${order.customerPhoto || DEFAULT_AVATAR}" class="w-10 h-10 rounded-full object-cover border border-slate-200">
+                                <div class="min-w-0"><h3 class="text-sm font-extrabold text-slate-900 truncate">${escapeHtml(order.customerName)}</h3><p class="text-xs text-slate-500">${escapeHtml(order.customerPhone)}</p></div>
+                            </div>
+                            <a href="tel:${order.customerPhone}" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-900 font-bold text-xs">📞 Call</a>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/70 space-y-1 text-xs">
+                            <p class="font-extrabold text-slate-900 whitespace-pre-line">${escapeHtml(order.details)}</p>
+                            <p class="text-slate-600">📍 ${escapeHtml(order.dropoffAddress)}</p>
+                            <p class="font-bold text-[#FF5722]">${escapeHtml(order.fareText)}</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="cycleAdminOrderStatus(${idx})" class="py-2.5 rounded-xl bg-[#FF5722] text-white font-extrabold text-xs">Change Status</button>
+                            <button onclick="openChatModal(${order.id}, 'admin')" class="py-2.5 rounded-xl bg-slate-900 text-white font-extrabold text-xs">💬 Chat</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function cycleAdminOrderStatus(index) {
+            const flow = ['Pending', 'Accepted', 'On the way', 'Delivered'];
+            const nextIdx = (flow.indexOf(allOrders[index].status) + 1) % flow.length;
+            allOrders[index].status = flow[nextIdx];
+            saveOrders();
+            renderAdminOrders();
+        }
+
+        function renderAdminStaffList() {
+            const list = document.getElementById('admin-staff-list');
+            if (allRiders.length === 0) { list.innerHTML = `<p class="text-center text-xs text-slate-400 py-8">No applications</p>`; return; }
+            list.innerHTML = allRiders.map((r, idx) => `
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 flex items-center justify-between gap-3">
+                    <div>
+                        <p class="text-sm font-extrabold text-slate-900">${escapeHtml(r.name)}</p>
+                        <p class="text-xs text-slate-500">📞 ${escapeHtml(r.phone)}</p>
+                        <span class="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${r.approved ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${r.approved ? 'Approved' : 'Pending'}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        ${!r.approved ? `<button onclick="approveRider(${idx})" class="px-3 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs">Approve</button>` : `<button onclick="revokeRider(${idx})" class="px-3 py-1.5 rounded-xl bg-amber-50 text-amber-700 font-bold text-xs">Revoke</button>`}
+                        <button onclick="deleteRider(${idx})" class="px-3 py-1.5 rounded-xl bg-red-50 text-red-600 font-bold text-xs">Delete</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        function openRiderPortalGate() { navigateToScreen('rider', true); }
-        function exitRiderPortal() { navigateToScreen('home', true); }
-        function submitRiderApplication(e) { e.preventDefault(); showToast("Application sent"); }
-        function checkRiderApprovalStatus() {}
-        function renderRiderPortalState() {}
-
-        function openPinModal() { navigateToScreen('admin', true); }
-        function closePinModal() {}
-        function verifyPin() {}
-        function exitAdmin() { navigateToScreen('home', true); }
-        function switchAdminTab(tab) {
-            ['admin-view-orders', 'admin-view-staff', 'admin-view-hotlines', 'admin-view-rates'].forEach(id => document.getElementById(id).classList.add('hidden'));
-            document.getElementById(`admin-view-${tab}`).classList.remove('hidden');
-            if (tab === 'orders') renderAdminOrders();
+        function approveRider(idx) { allRiders[idx].approved = true; saveRiders(); renderAdminStaffList(); showToast("Rider approved!"); }
+        function revokeRider(idx) { allRiders[idx].approved = false; saveRiders(); renderAdminStaffList(); showToast("Rider revoked"); }
+        function deleteRider(idx) {
+            if (confirm("Delete this rider?")) { allRiders.splice(idx, 1); saveRiders(); renderAdminStaffList(); showToast("Rider deleted"); }
         }
-        function renderAdminOrders() {
-            document.getElementById('admin-orders-container').innerHTML = allOrders.map(o => `<div class="bg-white p-3 rounded-xl border"><p class="text-xs font-bold">${escapeHtml(o.customerName)} • ${escapeHtml(o.details)}</p></div>`).join('');
+
+        function populateAdminConfigForm() {
+            document.getElementById('cfg-order-town').value = appConfig.orderTown;
+            document.getElementById('cfg-order-outer').value = appConfig.orderOuter;
+            document.getElementById('cfg-order-extrastop').value = appConfig.orderExtraStop;
+            document.getElementById('cfg-bike-town').value = appConfig.bikeTown;
+            document.getElementById('cfg-bike-outer').value = appConfig.bikeOuter;
+            document.getElementById('cfg-bike-bawgyo').value = appConfig.bikeBawgyo;
+            document.getElementById('cfg-rules-textarea').value = (appConfig.rules || []).join('\n');
         }
-        function saveAdminRates(e) { e.preventDefault(); showToast("Saved"); }
 
-        function openShopPortal() { navigateToScreen('shop-manager', true); }
-        function openNewShopForm() {}
-        function previewShopPhoto(e) {}
-        function saveShopChannel(e) { e.preventDefault(); showToast("Shop saved"); }
-        function renderShopManagerList() {}
+        function saveAdminRates(e) {
+            e.preventDefault();
+            appConfig.orderTown = Number(document.getElementById('cfg-order-town').value) || 2000;
+            appConfig.orderOuter = Number(document.getElementById('cfg-order-outer').value) || 3000;
+            appConfig.orderExtraStop = Number(document.getElementById('cfg-order-extrastop').value) || 500;
+            appConfig.bikeTown = Number(document.getElementById('cfg-bike-town').value) || 4000;
+            appConfig.bikeOuter = Number(document.getElementById('cfg-bike-outer').value) || 5000;
+            appConfig.bikeBawgyo = Number(document.getElementById('cfg-bike-bawgyo').value) || 8000;
+            saveConfig();
+            renderDynamicRatesAndRules();
+            showToast("Rates updated successfully!");
+        }
 
-        function setMainGoogleMapType(t) {}
-        function refreshMainGoogleMapIframe() { document.getElementById('main-google-map-iframe').src = `https://maps.google.com/maps?q=${HSIPAW_LAT},${HSIPAW_LNG}&t=k&z=16&output=embed`; }
-        function locateUserOnGoogleSatelliteMap() {}
+        function saveAdminRules(e) {
+            e.preventDefault();
+            appConfig.rules = document.getElementById('cfg-rules-textarea').value.split('\n').map(l => l.trim()).filter(Boolean);
+            saveConfig();
+            renderDynamicRatesAndRules();
+            showToast("Terms updated successfully!");
+        }
 
-        function openChatModal(id, role) { document.getElementById('chat-modal').classList.remove('hidden'); document.getElementById('chat-modal').classList.add('flex'); }
-        function closeChatModal() { document.getElementById('chat-modal').classList.add('hidden'); document.getElementById('chat-modal').classList.remove('flex'); }
-        function sendChatMessage(e) { e.preventDefault(); }
+        function openShopPortal() {
+            if (shopUnlocked) { openShopManagerView(); return; }
+            document.getElementById('shop-pass-input').value = "";
+            document.getElementById('shop-pass-error').classList.add('hidden');
+            const modal = document.getElementById('shop-pass-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => document.getElementById('shop-pass-input').focus(), 100);
+        }
 
-        function escapeHtml(str) { const d = document.createElement('div'); d.textContent = str == null ? '' : String(str); return d.innerHTML; }
-        function escapeAttr(str) { return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+        function closeShopPassModal() {
+            document.getElementById('shop-pass-modal').classList.add('hidden');
+            document.getElementById('shop-pass-modal').classList.remove('flex');
+        }
+
+        function verifyShopPassword() {
+            if (document.getElementById('shop-pass-input').value.trim() === SHOP_SECRET_PIN) {
+                shopUnlocked = true;
+                closeShopPassModal();
+                openShopManagerView();
+            } else { document.getElementById('shop-pass-error').classList.remove('hidden'); }
+        }
+
+        function openShopManagerView() {
+            hideAllViews();
+            document.getElementById('view-shop-manager').classList.remove('hidden');
+            renderShopManagerList();
+        }
+
+        function openNewShopForm() {
+            document.getElementById('shop-setup-form').reset();
+            tempShopPhoto = DEFAULT_SHOP_IMG;
+            document.getElementById('shop-photo-preview').innerHTML = `<span class="text-xl">📷</span><span class="text-[9px] font-bold">Photo</span>`;
+        }
+
+        function previewShopPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                tempShopPhoto = e.target.result;
+                document.getElementById('shop-photo-preview').innerHTML = `<img src="${tempShopPhoto}" class="w-full h-full object-cover">`;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveShopChannel(e) {
+            e.preventDefault();
+            const name = document.getElementById('shop-name-input').value.trim();
+            const phone = document.getElementById('shop-phone-input').value.trim();
+            const address = document.getElementById('shop-address-input').value.trim();
+            if (!name || !phone || !address) return;
+
+            allShops.unshift({ id: 'shop_' + Date.now(), name, phone, address, photo: tempShopPhoto, items: [] });
+            saveShops();
+            openNewShopForm();
+            renderShopManagerList();
+            showToast(`Shop "${name}" registered!`);
+        }
+
+        function addMenuItemToShop(event, shopId) {
+            event.preventDefault();
+            const form = event.target;
+            const itemName = form.querySelector('.menu-name-input').value.trim();
+            const itemPrice = parseInt(form.querySelector('.menu-price-input').value, 10) || 0;
+            const photoData = form.dataset.photoData || DEFAULT_SHOP_IMG;
+
+            const shop = allShops.find(s => s.id === shopId);
+            if (!shop || !itemName || !itemPrice) return;
+            if (!shop.items) shop.items = [];
+
+            shop.items.unshift({ id: 'item_' + Date.now(), name: itemName, priceNum: itemPrice, photo: photoData });
+            saveShops();
+            renderShopManagerList();
+            showToast("Menu added");
+        }
+
+        function handleMenuItemPhotoChange(event, formId) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const form = document.getElementById(formId);
+                form.dataset.photoData = e.target.result;
+                form.querySelector('.menu-photo-label').textContent = "✅ Photo Ready";
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function deleteMenuItem(shopId, itemId) {
+            const shop = allShops.find(s => s.id === shopId);
+            if (!shop) return;
+            shop.items = shop.items.filter(i => i.id !== itemId);
+            saveShops();
+            renderShopManagerList();
+        }
+
+        function renderShopManagerList() {
+            const container = document.getElementById('shop-manager-list');
+            container.innerHTML = allShops.map(shop => {
+                const formId = `add-menu-form-${shop.id}`;
+                const itemsHtml = (shop.items || []).map(item => `
+                    <div class="flex items-center justify-between gap-2 bg-slate-50 p-2 rounded-xl border border-slate-200/70">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <img src="${item.photo || DEFAULT_SHOP_IMG}" class="w-10 h-10 rounded-lg object-cover">
+                            <div class="min-w-0"><p class="text-xs font-extrabold text-slate-900 truncate">${escapeHtml(item.name)}</p><p class="text-[11px] font-bold text-[#FF5722]">${Number(item.priceNum || 0).toLocaleString()} Ks</p></div>
+                        </div>
+                        <button type="button" onclick="deleteMenuItem('${shop.id}', '${item.id}')" class="px-2 py-1 rounded-lg bg-red-50 text-red-600 text-[11px] font-bold">Delete</button>
+                    </div>
+                `).join('');
+
+                return `
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="flex items-center gap-3 pb-2 border-b border-slate-100">
+                            <img src="${shop.photo || DEFAULT_SHOP_IMG}" class="w-12 h-12 rounded-xl object-cover">
+                            <div><h3 class="text-sm font-extrabold text-slate-900">${escapeHtml(shop.name)}</h3><p class="text-[11px] text-slate-500">📍 ${escapeHtml(shop.address)}</p></div>
+                        </div>
+                        <form id="${formId}" onsubmit="addMenuItemToShop(event, '${shop.id}')" class="bg-orange-50/70 p-3 rounded-xl border border-orange-200 space-y-2">
+                            <p class="text-[11px] font-extrabold text-[#FF5722]">+ Add Menu Item</p>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" required placeholder="Item Name" class="menu-name-input rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs text-slate-950">
+                                <input type="number" required placeholder="Price (Ks)" class="menu-price-input rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs text-slate-950">
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <label class="menu-photo-label flex-1 cursor-pointer py-2 px-3 rounded-lg bg-white border border-slate-300 text-slate-700 text-[11px] font-bold text-center">
+                                    📷 Choose Photo
+                                    <input type="file" accept="image/*" class="hidden" onchange="handleMenuItemPhotoChange(event, '${formId}')">
+                                </label>
+                                <button type="submit" class="px-4 py-2 rounded-lg bg-[#FF5722] text-white text-xs font-extrabold">Post</button>
+                            </div>
+                        </form>
+                        <div class="space-y-1.5">${itemsHtml}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function setMainGoogleMapType(type) {
+            mainMapType = type;
+            document.getElementById('btn-map-sat').className = type === 'k' ? "px-2.5 py-1 rounded-lg bg-white text-[#FF5722] text-xs font-bold shadow-2xs" : "px-2.5 py-1 rounded-lg text-slate-600 text-xs font-bold";
+            document.getElementById('btn-map-std').className = type === 'm' ? "px-2.5 py-1 rounded-lg bg-white text-[#FF5722] text-xs font-bold shadow-2xs" : "px-2.5 py-1 rounded-lg text-slate-600 text-xs font-bold";
+            refreshMainGoogleMapIframe();
+        }
+
+        function refreshMainGoogleMapIframe() {
+            document.getElementById('main-google-map-iframe').src = `https://maps.google.com/maps?q=${mainMapLat},${mainMapLng}&t=${mainMapType}&z=16&output=embed`;
+            document.getElementById('main-map-coords').textContent = `${mainMapLat.toFixed(4)}, ${mainMapLng.toFixed(4)}`;
+            document.getElementById('main-map-gmaps-link').href = `https://maps.google.com/maps?q=${mainMapLat},${mainMapLng}&t=${mainMapType}`;
+        }
+
+        function locateUserOnGoogleSatelliteMap() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => { mainMapLat = pos.coords.latitude; mainMapLng = pos.coords.longitude; refreshMainGoogleMapIframe(); },
+                    () => { mainMapLat = HSIPAW_LAT; mainMapLng = HSIPAW_LNG; refreshMainGoogleMapIframe(); }
+                );
+            }
+        }
+
+        const ADMIN_QUICK_REPLIES = ["Purchased items", "On the way now", "Arrived at your gate", "Please wait a moment"];
+        const CUSTOMER_QUICK_REPLIES = ["Okay, thank you!", "Please hurry", "Waiting outside"];
+
+        function countUnreadForOrder(order, viewerRole) {
+            if (!order.messages) return 0;
+            return order.messages.filter(m => viewerRole === 'customer' ? (m.sender === 'admin' && !m.readByCustomer) : (m.sender === 'customer' && !m.readByAdmin)).length;
+        }
+
+        function updateUnreadIndicators() {
+            const totalUnread = allOrders.reduce((sum, o) => sum + countUnreadForOrder(o, 'customer'), 0);
+            const dot = document.getElementById('nav-unread-dot');
+            if (totalUnread > 0) dot.classList.remove('hidden');
+            else dot.classList.add('hidden');
+        }
+
+        function openChatModal(orderId, role) {
+            activeChatOrderId = orderId;
+            activeChatRole = role;
+            const modal = document.getElementById('chat-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            const order = allOrders.find(o => o.id === orderId);
+            if (order) {
+                document.getElementById('chat-header-title').textContent = role === 'admin' ? `💬 ${order.customerName}` : `💬 Rider / Dispatch`;
+                document.getElementById('chat-header-subtitle').textContent = `Status: ${order.status}`;
+                document.getElementById('chat-order-summary').innerHTML = `<span class="truncate font-bold">📦 ${escapeHtml(order.details)}</span>`;
+                const replies = role === 'admin' ? ADMIN_QUICK_REPLIES : CUSTOMER_QUICK_REPLIES;
+                document.getElementById('chat-quick-replies').innerHTML = replies.map(txt =>
+                    `<button type="button" onclick="pushMessageToOrder('${txt}')" class="px-3 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-[#FF5722] font-bold text-xs whitespace-nowrap">${txt}</button>`
+                ).join('');
+            }
+            renderChatMessages();
+        }
+
+        function closeChatModal() {
+            activeChatOrderId = null;
+            document.getElementById('chat-modal').classList.add('hidden');
+            document.getElementById('chat-modal').classList.remove('flex');
+            refreshVisibleScreens();
+        }
+
+        function renderChatMessages() {
+            const order = allOrders.find(o => o.id === activeChatOrderId);
+            if (!order) return;
+            if (!order.messages) order.messages = [];
+
+            order.messages.forEach(m => {
+                if (activeChatRole === 'customer' && m.sender === 'admin') m.readByCustomer = true;
+                if (activeChatRole === 'admin' && m.sender === 'customer') m.readByAdmin = true;
+            });
+            saveOrders();
+
+            const feed = document.getElementById('chat-messages-feed');
+            if (order.messages.length === 0) {
+                feed.innerHTML = `<p class="text-center text-xs text-slate-400 py-10">No messages yet</p>`;
+                return;
+            }
+            feed.innerHTML = order.messages.map(msg => {
+                const isMine = msg.sender === activeChatRole;
+                return `
+                    <div class="flex flex-col ${isMine ? 'items-end' : 'items-start'}">
+                        <span class="text-[10px] text-slate-400 mb-0.5">${msg.time}</span>
+                        <div class="max-w-[80%] rounded-2xl px-4 py-2.5 text-sm ${isMine ? 'bg-[#FF5722] text-white' : 'bg-white border border-slate-200 text-slate-900'}">${escapeHtml(msg.text)}</div>
+                    </div>
+                `;
+            }).join('');
+            feed.scrollTop = feed.scrollHeight;
+        }
+
+        function sendChatMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-text-input');
+            const text = input.value.trim();
+            if (!text) return;
+            input.value = "";
+            pushMessageToOrder(text);
+        }
+
+        function pushMessageToOrder(text) {
+            const order = allOrders.find(o => o.id === activeChatOrderId);
+            if (!order) return;
+            if (!order.messages) order.messages = [];
+            order.messages.push({
+                sender: activeChatRole,
+                text,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                readByCustomer: activeChatRole === 'customer',
+                readByAdmin: activeChatRole === 'admin'
+            });
+            saveOrders();
+            renderChatMessages();
+            updateUnreadIndicators();
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str == null ? '' : String(str);
+            return div.innerHTML;
+        }
+
+        function escapeAttr(str) {
+            return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        }
     </script>
 </body>
 </html>
