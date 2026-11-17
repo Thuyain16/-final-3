@@ -1,23 +1,23 @@
 {
   "name": "Thipaw Delivery Super-App",
   "short_name": "Thipaw Delivery",
-  "start_url": "/-final-3/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F8FAFC",
   "theme_color": "#FF5722",
   "orientation": "portrait",
-  "description": "သီပေါမြို့တွင်း ပို့ဆောင်ခ၊ အစားအသောက်နှင့် ဆိုင်ကယ်ကယ်ရီ ဝန်ဆောင်မှုအက်ပ်",
+  "description": "သီပေါမြို့တွင်း ပို့ဆောင်ရေး၊ အစားအသောက်နှင့် ဆိုင်ကယ်ကယ်ရီ ဝန်ဆောင်မှုအက်ပ်",
   "icons": [
     {
-      "src": "https://i.ibb.co/C3M0SdT7/1794811370987.png",
+      "src": "https://i.ibb.co/C3M05dT7/1794811370987.jpg",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {
-      "src": "https://i.ibb.co/C3M0SdT7/1794811370987.png",
+      "src": "https://i.ibb.co/C3M05dT7/1794811370987.jpg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     }
   ]
