@@ -102,10 +102,10 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="openRiderPortalGate()" id="t-rider-btn" class="px-3 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-[#FF5722] font-extrabold text-xs flex items-center gap-1 shadow-2xs">
+                    <button onclick="navigateToScreen('rider')" id="t-rider-btn" class="px-3 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-[#FF5722] font-extrabold text-xs flex items-center gap-1 shadow-2xs">
                         🛵 ဝန်ထမ်း
                     </button>
-                    <button onclick="openPinModal()" class="px-3 py-1.5 rounded-xl bg-slate-900 text-white font-extrabold text-xs shadow-2xs">
+                    <button onclick="navigateToScreen('admin')" class="px-3 py-1.5 rounded-xl bg-slate-900 text-white font-extrabold text-xs shadow-2xs">
                         Admin
                     </button>
                 </div>
@@ -128,28 +128,28 @@
 
                     <!-- SERVICES GRID (2x2 Clean Layout) -->
                     <div class="grid grid-cols-2 gap-3">
-                        <button onclick="openService('food')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
+                        <button onclick="navigateToScreen('food')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
                             <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🍜</div>
                             <div>
                                 <span id="t-svc-food" class="text-xs font-extrabold text-slate-950 block">Food</span>
                                 <span id="t-svc-food-sub" class="text-[10px] text-slate-400 block mt-0.5">ဆိုင်မီနူးများ</span>
                             </div>
                         </button>
-                        <button onclick="openService('custom')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
+                        <button onclick="navigateToScreen('custom')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
                             <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🛍️</div>
                             <div>
                                 <span id="t-svc-custom" class="text-xs font-extrabold text-slate-950 block">မှာမည်</span>
                                 <span id="t-svc-custom-sub" class="text-[10px] text-slate-400 block mt-0.5">တခြားဝယ်ခိုင်းရန်</span>
                             </div>
                         </button>
-                        <button onclick="openService('bike')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
+                        <button onclick="navigateToScreen('bike')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
                             <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🛵</div>
                             <div>
                                 <span id="t-svc-bike" class="text-xs font-extrabold text-slate-950 block">Bike Taxi</span>
                                 <span id="t-svc-bike-sub" class="text-[10px] text-slate-400 block mt-0.5">ဆိုင်ကယ်ကယ်ရီ</span>
                             </div>
                         </button>
-                        <button onclick="openService('map')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
+                        <button onclick="navigateToScreen('map')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
                             <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🛰️</div>
                             <div>
                                 <span id="t-svc-map" class="text-xs font-extrabold text-slate-950 block">Satellite Map</span>
@@ -164,7 +164,7 @@
                             <h3 id="t-svc-shop" class="text-sm font-extrabold">ဆိုင်ရှင်များအတွက် (Merchant Portal)</h3>
                             <p id="t-svc-shop-sub" class="text-[11px] text-orange-100">သင့်ဆိုင်မီနူးနှင့် ဈေးနှုန်းများကို ကိုယ်တိုင်တင်ပါ</p>
                         </div>
-                        <button onclick="openShopPortal()" class="px-4 py-2 rounded-xl bg-white text-[#FF5722] font-extrabold text-xs shadow-sm">
+                        <button onclick="navigateToScreen('shop-manager')" class="px-4 py-2 rounded-xl bg-white text-[#FF5722] font-extrabold text-xs shadow-sm">
                             ဆိုင်ဖွင့်မည်
                         </button>
                     </div>
@@ -173,7 +173,7 @@
                     <div class="space-y-2.5">
                         <div class="flex items-center justify-between">
                             <h3 id="t-home-shops-title" class="text-xs font-extrabold text-slate-900">🏪 Thipaw Delivery ရှိ ဆိုင်များ</h3>
-                            <button onclick="openService('food')" id="t-view-all-shops" class="text-xs font-bold text-[#FF5722]">အားလုံးကြည့်မည် →</button>
+                            <button onclick="navigateToScreen('food')" id="t-view-all-shops" class="text-xs font-bold text-[#FF5722]">အားလုံးကြည့်မည် →</button>
                         </div>
                         <div id="home-shops-strip" class="flex gap-3 overflow-x-auto no-scrollbar pb-1"></div>
                     </div>
@@ -200,7 +200,7 @@
                             <h2 id="t-food-header" class="text-base font-extrabold text-slate-900">🍜 Food & ဆိုင်မီနူးများ</h2>
                             <p id="t-food-sub" class="text-[11px] text-slate-500">ဆိုင်တစ်ဆိုင် သို့မဟုတ် ဆိုင်များစွာမှ အစားအသောက်များကို ပေါင်းစပ်မှာယူနိုင်ပါသည်</p>
                         </div>
-                        <button onclick="openService('custom')" id="t-cust-buy-btn" class="px-3 py-1.5 rounded-xl bg-orange-100 text-[#FF5722] font-extrabold text-xs shrink-0">
+                        <button onclick="navigateToScreen('custom')" id="t-cust-buy-btn" class="px-3 py-1.5 rounded-xl bg-orange-100 text-[#FF5722] font-extrabold text-xs shrink-0">
                             + တခြားမှာမည်
                         </button>
                     </div>
@@ -480,16 +480,16 @@
                         <button onclick="openEditProfile()" id="t-acc-edit" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
                             ✏️ ပရိုဖိုင်နှင့် ဓာတ်ပုံ ပြင်ဆင်မည်
                         </button>
-                        <button onclick="openShopPortal()" id="t-acc-shop" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
+                        <button onclick="navigateToScreen('shop-manager')" id="t-acc-shop" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
                             🏪 ဆိုင် Channel ဖွင့်ရန် / စီမံရန်
                         </button>
-                        <button onclick="openRiderPortalGate()" id="t-acc-rider" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
+                        <button onclick="navigateToScreen('rider')" id="t-acc-rider" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
                             🛵 ဝန်ထမ်း အော်ဒါကောက်ရန် နေရာ
                         </button>
                         <button onclick="openAboutModal()" id="t-acc-about" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
                             ℹ️ App အကြောင်းနှင့် စည်းမျဉ်းစည်းကမ်းများ
                         </button>
-                        <button onclick="openPinModal()" id="t-acc-admin" class="w-full py-3 px-4 rounded-2xl bg-slate-900 text-white font-extrabold text-xs text-left shadow-sm">
+                        <button onclick="navigateToScreen('admin')" id="t-acc-admin" class="w-full py-3 px-4 rounded-2xl bg-slate-900 text-white font-extrabold text-xs text-left shadow-sm">
                             🔒 Admin စီမံခန့်ခွဲမှု နေရာ
                         </button>
                     </div>
@@ -499,20 +499,20 @@
 
             <!-- BOTTOM NAVIGATION BAR (Exact 4 icons matching the mockup) -->
             <div class="bg-white border-t border-slate-200 px-4 py-2.5 flex items-center justify-around shrink-0 z-20">
-                <button onclick="switchBottomTab('home')" id="nav-home" class="flex flex-col items-center text-[#FF5722] font-bold text-[11px] gap-0.5">
+                <button onclick="navigateToScreen('home')" id="nav-home" class="flex flex-col items-center text-[#FF5722] font-bold text-[11px] gap-0.5">
                     <span class="text-lg">🏠</span>
                     <span id="t-nav-home">Home</span>
                 </button>
-                <button onclick="switchBottomTab('activity')" id="nav-activity" class="flex flex-col items-center text-slate-400 font-semibold text-[11px] gap-0.5 relative">
+                <button onclick="navigateToScreen('activity')" id="nav-activity" class="flex flex-col items-center text-slate-400 font-semibold text-[11px] gap-0.5 relative">
                     <span class="text-lg">📋</span>
                     <span id="t-nav-activity">Activity</span>
                     <span id="nav-unread-dot" class="hidden absolute top-0 right-1 w-2 h-2 rounded-full bg-[#FF5722]"></span>
                 </button>
-                <button onclick="switchBottomTab('map')" id="nav-map" class="flex flex-col items-center text-slate-400 font-semibold text-[11px] gap-0.5">
+                <button onclick="navigateToScreen('map')" id="nav-map" class="flex flex-col items-center text-slate-400 font-semibold text-[11px] gap-0.5">
                     <span class="text-lg">🛰️</span>
                     <span id="t-nav-map">Map</span>
                 </button>
-                <button onclick="switchBottomTab('account')" id="nav-account" class="flex flex-col items-center text-slate-400 font-semibold text-[11px] gap-0.5">
+                <button onclick="navigateToScreen('account')" id="nav-account" class="flex flex-col items-center text-slate-400 font-semibold text-[11px] gap-0.5">
                     <span class="text-lg">👤</span>
                     <span id="t-nav-account">Profile</span>
                 </button>
@@ -1506,6 +1506,18 @@
             applyLanguageStrings();
             renderGrabSuggestedPlaces();
             renderAdminHotlinesUI();
+            
+            // SPA History Initialization & Popstate listener
+            history.replaceState({ screen: 'home' }, "", "");
+            window.addEventListener('popstate', (event) => {
+                const state = event.state;
+                if (state && state.screen) {
+                    showScreenOnly(state.screen);
+                } else {
+                    showScreenOnly('home');
+                }
+            });
+
             if (!termsAccepted) {
                 showTermsScreen();
             } else if (!userProfile) {
@@ -1514,6 +1526,72 @@
                 enterMainApp();
             }
         };
+
+        // Unified Navigation Helper with pushState for Back Button support
+        function navigateToScreen(screenKey) {
+            history.pushState({ screen: screenKey }, "", "");
+            showScreenOnly(screenKey);
+        }
+
+        function showScreenOnly(screenKey) {
+            document.getElementById('terms-screen').classList.add('hidden');
+            document.getElementById('register-screen').classList.add('hidden');
+            document.getElementById('admin-screen').classList.add('hidden');
+            document.getElementById('rider-screen').classList.add('hidden');
+            document.getElementById('main-app-shell').classList.add('hidden');
+            
+            ['view-home', 'view-food', 'view-custom', 'view-bike', 'view-shop-manager', 'view-activity', 'view-map', 'view-account'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById('main-scroll-area').scrollTop = 0;
+
+            if (screenKey === 'home') {
+                document.getElementById('main-app-shell').classList.remove('hidden');
+                document.getElementById('view-home').classList.remove('hidden');
+                highlightNav('nav-home');
+                renderHomeShopsStrip();
+                renderHomeActiveOrder();
+                renderAdminHotlinesUI();
+            } else if (screenKey === 'food') {
+                document.getElementById('main-app-shell').classList.remove('hidden');
+                document.getElementById('view-food').classList.remove('hidden');
+                renderFoodShopBrowser();
+                renderFoodCart();
+            } else if (screenKey === 'custom') {
+                document.getElementById('main-app-shell').classList.remove('hidden');
+                document.getElementById('view-custom').classList.remove('hidden');
+                updateCustomFeeDisplay();
+            } else if (screenKey === 'bike') {
+                document.getElementById('main-app-shell').classList.remove('hidden');
+                document.getElementById('view-bike').classList.remove('hidden');
+                recalculateBikeFare();
+            } else if (screenKey === 'shop-manager') {
+                document.getElementById('main-app-shell').classList.remove('hidden');
+                document.getElementById('view-shop-manager').classList.remove('hidden');
+                renderShopManagerList();
+            } else if (screenKey === 'activity') {
+                document.getElementById('main-app-shell').classList.remove('hidden');
+                document.getElementById('view-activity').classList.remove('hidden');
+                highlightNav('nav-activity');
+                renderUserActivity();
+            } else if (screenKey === 'map') {
+                document.getElementById('main-app-shell').classList.remove('hidden');
+                document.getElementById('view-map').classList.remove('hidden');
+                highlightNav('nav-map');
+                refreshMainGoogleMapIframe();
+            } else if (screenKey === 'account') {
+                document.getElementById('main-app-shell').classList.remove('hidden');
+                document.getElementById('view-account').classList.remove('hidden');
+                highlightNav('nav-account');
+                renderAdminHotlinesUI();
+            } else if (screenKey === 'rider') {
+                document.getElementById('rider-screen').classList.remove('hidden');
+                renderRiderPortalState();
+            } else if (screenKey === 'admin') {
+                document.getElementById('admin-screen').classList.remove('hidden');
+                switchAdminTab('orders');
+            }
+        }
 
         function showToast(msg) {
             const box = document.getElementById('toast-box');
@@ -1674,63 +1752,21 @@
             renderHomeActiveOrder();
             renderAdminHotlinesUI();
             updateUnreadIndicators();
-            switchBottomTab('home');
-        }
-
-        function hideAllViews() {
-            ['view-home', 'view-food', 'view-custom', 'view-bike', 'view-shop-manager', 'view-activity', 'view-map', 'view-account'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-        }
-
-        function switchBottomTab(tab) {
-            hideAllViews();
-            document.getElementById('main-scroll-area').scrollTop = 0;
-
-            ['nav-home', 'nav-activity', 'nav-map', 'nav-account'].forEach(id => {
-                const el = document.getElementById(id);
-                el.classList.remove('text-[#FF5722]', 'font-bold');
-                el.classList.add('text-slate-400', 'font-semibold');
-            });
-
-            if (tab === 'home') {
-                document.getElementById('view-home').classList.remove('hidden');
-                highlightNav('nav-home');
-                renderHomeShopsStrip();
-                renderHomeActiveOrder();
-                renderAdminHotlinesUI();
-            } else if (tab === 'activity') {
-                document.getElementById('view-activity').classList.remove('hidden');
-                highlightNav('nav-activity');
-                renderUserActivity();
-            } else if (tab === 'map') {
-                document.getElementById('view-map').classList.remove('hidden');
-                highlightNav('nav-map');
-                refreshMainGoogleMapIframe();
-            } else if (tab === 'account') {
-                document.getElementById('view-account').classList.remove('hidden');
-                highlightNav('nav-account');
-                renderAdminHotlinesUI();
-            }
+            navigateToScreen('home');
         }
 
         function highlightNav(id) {
-            const el = document.getElementById(id);
-            el.classList.remove('text-slate-400', 'font-semibold');
-            el.classList.add('text-[#FF5722]', 'font-bold');
-        }
-
-        function openService(service) {
-            hideAllViews();
-            document.getElementById('main-scroll-area').scrollTop = 0;
-            document.getElementById(`view-${service}`).classList.remove('hidden');
-            if (service === 'food') {
-                renderFoodShopBrowser();
-                renderFoodCart();
-            } else if (service === 'custom') {
-                updateCustomFeeDisplay();
-            } else if (service === 'bike') {
-                recalculateBikeFare();
+            ['nav-home', 'nav-activity', 'nav-map', 'nav-account'].forEach(navId => {
+                const el = document.getElementById(navId);
+                if (el) {
+                    el.classList.remove('text-[#FF5722]', 'font-bold');
+                    el.classList.add('text-slate-400', 'font-semibold');
+                }
+            });
+            const activeEl = document.getElementById(id);
+            if (activeEl) {
+                activeEl.classList.remove('text-slate-400', 'font-semibold');
+                activeEl.classList.add('text-[#FF5722]', 'font-bold');
             }
         }
 
@@ -1755,7 +1791,7 @@
 
         function openFoodWithShop(shopId) {
             selectedShopId = shopId;
-            openService('food');
+            navigateToScreen('food');
         }
 
         function renderHomeActiveOrder() {
@@ -2004,7 +2040,7 @@
             foodCart = [];
             renderFoodCart();
             showToast("Unified Food Order placed!");
-            switchBottomTab('activity');
+            navigateToScreen('activity');
         }
 
         function updateCustomFeeDisplay() {
@@ -2056,7 +2092,7 @@
             saveOrders();
             e.target.reset();
             showToast("Custom order submitted!");
-            switchBottomTab('activity');
+            navigateToScreen('activity');
         }
 
         function renderGrabSuggestedPlaces() {
@@ -2207,7 +2243,7 @@
             saveOrders();
             e.target.reset();
             showToast("Bike Taxi requested via Grab Pin!");
-            switchBottomTab('activity');
+            navigateToScreen('activity');
         }
 
         function cancelOrderByCustomer(orderId) {
@@ -2309,12 +2345,7 @@
         }
 
         function enterRiderPortalScreen() {
-            document.getElementById('terms-screen').classList.add('hidden');
-            document.getElementById('register-screen').classList.add('hidden');
-            document.getElementById('main-app-shell').classList.add('hidden');
-            document.getElementById('admin-screen').classList.add('hidden');
-            document.getElementById('rider-screen').classList.remove('hidden');
-            renderRiderPortalState();
+            navigateToScreen('rider');
         }
 
         function exitRiderPortal() { enterMainApp(); }
@@ -2447,17 +2478,8 @@
         function verifyPin() {
             if (document.getElementById('pin-input').value.trim() === ADMIN_SECRET_PIN) {
                 closePinModal();
-                showAdminScreen();
+                navigateToScreen('admin');
             } else { document.getElementById('pin-error').classList.remove('hidden'); }
-        }
-
-        function showAdminScreen() {
-            document.getElementById('terms-screen').classList.add('hidden');
-            document.getElementById('register-screen').classList.add('hidden');
-            document.getElementById('main-app-shell').classList.add('hidden');
-            document.getElementById('rider-screen').classList.add('hidden');
-            document.getElementById('admin-screen').classList.remove('hidden');
-            switchAdminTab('orders');
         }
 
         function exitAdmin() { enterMainApp(); }
@@ -2578,7 +2600,7 @@
         }
 
         function openShopPortal() {
-            if (shopUnlocked) { openShopManagerView(); return; }
+            if (shopUnlocked) { navigateToScreen('shop-manager'); return; }
             document.getElementById('shop-pass-input').value = "";
             document.getElementById('shop-pass-error').classList.add('hidden');
             const modal = document.getElementById('shop-pass-modal');
@@ -2596,14 +2618,8 @@
             if (document.getElementById('shop-pass-input').value.trim() === SHOP_SECRET_PIN) {
                 shopUnlocked = true;
                 closeShopPassModal();
-                openShopManagerView();
+                navigateToScreen('shop-manager');
             } else { document.getElementById('shop-pass-error').classList.remove('hidden'); }
-        }
-
-        function openShopManagerView() {
-            hideAllViews();
-            document.getElementById('view-shop-manager').classList.remove('hidden');
-            renderShopManagerList();
         }
 
         function openNewShopForm() {
