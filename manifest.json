@@ -7,7 +7,7 @@
   "background_color": "#F8FAFC",
   "theme_color": "#FF5722",
   "orientation": "portrait",
-  "description": "သီပေါမြို့တွင်း ပို့ဆောင်ရေး၊ အစားအသောက်နှင့် ဆိုင်ကယ်ကယ်ရီ ဝန်ဆောင်မှုအက်ပ်",
+  "description": "သီးသန့်ပို့ဆောင်ရေး၊ ပို့ဆောင်ရေးစနစ်နှင့် ဆိုင်စာရင်းဝယ်ယူစုံစမ်းနိုင်ပြီး ဝန်ဆောင်မှုအာမခံ.",
   "icons": [
     {
       "src": "./1794811370987.png",
@@ -21,5 +21,10 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
+  ],
+  "permissions": [
+    "geolocation",
+    "camera",
+    "notifications"
   ]
 }
