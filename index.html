@@ -36,7 +36,7 @@
 </head>
 <body class="bg-slate-100 text-slate-900 antialiased min-h-screen flex justify-center items-center">
 
-    <div class="w-full max-w-[480px] bg-[#F8FAFC] min-h-screen sm:min-h-[850px] sm:rounded-[36px] sm:shadow-2xl overflow-hidden flex flex-col relative border border-slate-200">
+    <div class="w-full max-w-[480px] bg-[#F8FAFC] h-dvh max-h-[820px] sm:rounded-[36px] sm:shadow-2xl overflow-hidden flex flex-col relative border border-slate-200">
 
         <!-- 1. TERMS & RULES WELCOME SCREEN -->
         <div id="terms-screen" class="absolute inset-0 bg-[#F8FAFC] z-50 flex flex-col p-6 overflow-y-auto hidden">
@@ -107,121 +107,107 @@
             </div>
         </div>
 
-        <!-- 3. MAIN APP SHELL -->
-        <div id="main-app-shell" class="flex-1 flex flex-col h-screen sm:h-[850px] overflow-hidden hidden">
+        <!-- 3. MAIN APP SHELL (FIXED SINGLE-SCREEN FRAME WITH FIXED BOTTOM BAR) -->
+        <div id="main-app-shell" class="flex-1 flex flex-col h-full min-h-0 overflow-hidden hidden">
             <!-- TOP HEADER -->
-            <div class="bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between shrink-0 z-10 shadow-xs">
+            <div class="bg-white border-b border-slate-200 px-4 py-2 flex items-center justify-between shrink-0 z-10 shadow-2xs">
                 <div class="flex items-center gap-2.5">
-                    <img src="./1794811370987.png" onerror="this.src='https://i.ibb.co/B5NfCWH9/1794811370987.jpg'" alt="TD Logo" class="w-10 h-10 rounded-2xl object-cover border border-orange-200 shadow-2xs">
+                    <img src="./1794811370987.png" onerror="this.src='https://i.ibb.co/B5NfCWH9/1794811370987.jpg'" alt="TD Logo" class="w-8 h-8 rounded-xl object-cover border border-orange-200 shadow-2xs">
                     <div>
                         <div class="flex items-center gap-1.5">
-                            <span id="t-city-badge" class="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-orange-100 text-[#FF5722]">📍 သီပေါမြို့</span>
+                            <span id="t-city-badge" class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-orange-100 text-[#FF5722]">📍 သီပေါမြို့</span>
                             <span id="home-starting-rate" class="text-[10px] font-bold text-slate-500">From 2,000 Ks</span>
                         </div>
                         <h2 class="text-xs font-extrabold text-slate-900">Thipaw Delivery</h2>
                     </div>
                 </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="openRiderPortalGate()" id="t-rider-btn" class="px-3 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-[#FF5722] font-extrabold text-xs flex items-center gap-1 shadow-2xs">
+                <div class="flex items-center gap-1.5">
+                    <button onclick="openRiderPortalGate()" id="t-rider-btn" class="px-2.5 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-[#FF5722] font-extrabold text-xs flex items-center gap-1 shadow-2xs">
                         🛵 ဝန်ထမ်း
                     </button>
-                    <button onclick="openPinModal()" class="px-3 py-1.5 rounded-xl bg-slate-900 text-white font-extrabold text-xs shadow-2xs">
+                    <button onclick="openPinModal()" class="px-2.5 py-1.5 rounded-xl bg-slate-900 text-white font-extrabold text-xs shadow-2xs">
                         Admin
                     </button>
                 </div>
             </div>
 
-            <!-- SCROLLABLE BODY -->
-            <div id="main-scroll-area" class="flex-1 overflow-y-auto pb-24">
+            <!-- COMPACT TOP OPERATING HOURS BAR (SMALL & CLEAN) -->
+            <div id="operating-hours-banner" class="bg-emerald-50/90 border-b border-emerald-200/80 px-3.5 py-1 flex items-center justify-between shrink-0 text-[10px]">
+                <div class="flex items-center gap-1 min-w-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                    <span class="font-bold text-emerald-900 shrink-0">⏰ အော်ဒါချိန်:</span>
+                    <span id="home-hours-display" class="font-extrabold text-emerald-700 truncate">မနက် ၆:၀၀ နာရီ မှ ည ၇:၀၀ နာရီ အထိ</span>
+                </div>
+                <span id="service-open-badge" class="px-1.5 py-0.2 rounded bg-emerald-600 text-white text-[9px] font-extrabold shrink-0">OPEN</span>
+            </div>
 
-                <!-- HOME VIEW -->
-                <div id="view-home" class="p-4 space-y-4 fade-in">
-                    <!-- OPERATING HOURS BANNER -->
-                    <div id="operating-hours-banner" class="bg-emerald-50 border border-emerald-200 rounded-2xl px-3.5 py-2.5 flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <div>
-                                <p class="text-[11px] font-extrabold text-emerald-900">⏰ အော်ဒါလက်ခံချိန် (Operating Hours)</p>
-                                <p id="home-hours-display" class="text-xs font-extrabold text-emerald-700">မနက် ၆:၀၀ နာရီ မှ ည ၇:၀၀ နာရီ အထိ</p>
-                            </div>
-                        </div>
-                        <span id="service-open-badge" class="px-2 py-0.5 rounded-md bg-emerald-600 text-white text-[10px] font-extrabold">OPEN</span>
-                    </div>
+            <!-- SCROLLABLE BODY (STAYS INSIDE SINGLE SCREEN ABOVE FIXED BOTTOM BAR) -->
+            <div id="main-scroll-area" class="flex-1 min-h-0 overflow-y-auto pb-2">
 
+                <!-- HOME VIEW (COMPACT SINGLE-VIEW LAYOUT) -->
+                <div id="view-home" class="p-3 space-y-2.5 fade-in">
                     <!-- SEARCH BAR -->
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">🔍</span>
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 text-xs">🔍</span>
                         <input type="text" id="t-search-placeholder" placeholder="ဆိုင်နှင့် အစားအသောက် ရှာဖွေမည်..." onclick="navigateToScreen('food')"
-                            class="w-full rounded-2xl bg-white border border-slate-200/85 pl-10 pr-4 py-3 text-xs text-slate-900 shadow-2xs outline-none focus:border-[#FF5722]">
+                            class="w-full rounded-2xl bg-white border border-slate-200/85 pl-9 pr-4 py-2 text-xs text-slate-900 shadow-2xs outline-none focus:border-[#FF5722]">
                     </div>
 
                     <!-- ACTIVE ORDER BANNER -->
                     <div id="home-active-order-wrap" class="hidden"></div>
 
                     <!-- SERVICES GRID -->
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="navigateToScreen('food')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
-                            <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🍜</div>
-                            <div>
-                                <span id="t-svc-food" class="text-xs font-extrabold text-slate-950 block">Food</span>
-                                <span id="t-svc-food-sub" class="text-[10px] text-slate-400 block mt-0.5">ဆိုင်မီနူးများ</span>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="navigateToScreen('food')" class="bg-white p-3 rounded-2xl border border-slate-200/80 flex items-center gap-2.5 text-left shadow-2xs hover:border-orange-300 transition">
+                            <div class="w-9 h-9 rounded-xl bg-orange-50 flex items-center justify-center text-lg shrink-0">🍜</div>
+                            <div class="min-w-0">
+                                <span id="t-svc-food" class="text-xs font-extrabold text-slate-950 block truncate">Food</span>
+                                <span id="t-svc-food-sub" class="text-[10px] text-slate-400 block truncate">ဆိုင်မီနူးများ</span>
                             </div>
                         </button>
-                        <button onclick="navigateToScreen('custom')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
-                            <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🛍️</div>
-                            <div>
-                                <span id="t-svc-custom" class="text-xs font-extrabold text-slate-950 block">မှာမည်</span>
-                                <span id="t-svc-custom-sub" class="text-[10px] text-slate-400 block mt-0.5">တခြားဝယ်ခိုင်းရန်</span>
+                        <button onclick="navigateToScreen('custom')" class="bg-white p-3 rounded-2xl border border-slate-200/80 flex items-center gap-2.5 text-left shadow-2xs hover:border-orange-300 transition">
+                            <div class="w-9 h-9 rounded-xl bg-orange-50 flex items-center justify-center text-lg shrink-0">🛍️</div>
+                            <div class="min-w-0">
+                                <span id="t-svc-custom" class="text-xs font-extrabold text-slate-950 block truncate">မှာမည်</span>
+                                <span id="t-svc-custom-sub" class="text-[10px] text-slate-400 block truncate">တခြားဝယ်ခိုင်းရန်</span>
                             </div>
                         </button>
-                        <button onclick="navigateToScreen('bike')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
-                            <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🛵</div>
-                            <div>
-                                <span id="t-svc-bike" class="text-xs font-extrabold text-slate-950 block">Bike Taxi</span>
-                                <span id="t-svc-bike-sub" class="text-[10px] text-slate-400 block mt-0.5">ဆိုင်ကယ်ကယ်ရီ</span>
+                        <button onclick="navigateToScreen('bike')" class="bg-white p-3 rounded-2xl border border-slate-200/80 flex items-center gap-2.5 text-left shadow-2xs hover:border-orange-300 transition">
+                            <div class="w-9 h-9 rounded-xl bg-orange-50 flex items-center justify-center text-lg shrink-0">🛵</div>
+                            <div class="min-w-0">
+                                <span id="t-svc-bike" class="text-xs font-extrabold text-slate-950 block truncate">Bike Taxi</span>
+                                <span id="t-svc-bike-sub" class="text-[10px] text-slate-400 block truncate">ဆိုင်ကယ်ကယ်ရီ</span>
                             </div>
                         </button>
-                        <button onclick="navigateToScreen('map')" class="bg-white p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3 text-left shadow-2xs hover:border-orange-300 transition">
-                            <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🛰️</div>
-                            <div>
-                                <span id="t-svc-map" class="text-xs font-extrabold text-slate-950 block">Satellite Map</span>
-                                <span id="t-svc-map-sub" class="text-[10px] text-slate-400 block mt-0.5">ဂြိုဟ်တုမြေပုံ</span>
+                        <button onclick="navigateToScreen('map')" class="bg-white p-3 rounded-2xl border border-slate-200/80 flex items-center gap-2.5 text-left shadow-2xs hover:border-orange-300 transition">
+                            <div class="w-9 h-9 rounded-xl bg-orange-50 flex items-center justify-center text-lg shrink-0">🛰️</div>
+                            <div class="min-w-0">
+                                <span id="t-svc-map" class="text-xs font-extrabold text-slate-950 block truncate">Satellite Map</span>
+                                <span id="t-svc-map-sub" class="text-[10px] text-slate-400 block truncate">ဂြိုဟ်တုမြေပုံ</span>
                             </div>
                         </button>
                     </div>
 
                     <!-- MERCHANT / SHOP PORTAL ENTRY -->
-                    <div class="bg-gradient-to-r from-orange-500 to-[#FF5722] rounded-2xl p-4 text-white shadow-md flex items-center justify-between">
-                        <div class="space-y-1">
-                            <h3 id="t-svc-shop" class="text-sm font-extrabold">ဆိုင်ရှင်များအတွက် (Merchant Portal)</h3>
-                            <p id="t-svc-shop-sub" class="text-[11px] text-orange-100">သင့်ဆိုင်မီနူးနှင့် ဈေးနှုန်းများကို ကိုယ်တိုင်တင်ပါ</p>
+                    <div class="bg-gradient-to-r from-orange-500 to-[#FF5722] rounded-2xl p-3 text-white shadow-sm flex items-center justify-between gap-2">
+                        <div class="space-y-0.5 min-w-0">
+                            <h3 id="t-svc-shop" class="text-xs font-extrabold truncate">ဆိုင်ရှင်များအတွက် (Merchant Portal)</h3>
+                            <p id="t-svc-shop-sub" class="text-[10px] text-orange-100 truncate">သင့်ဆိုင်မီနူးနှင့် ဈေးနှုန်းများကို ကိုယ်တိုင်တင်ပါ</p>
                         </div>
-                        <button onclick="openShopPortal()" class="px-4 py-2 rounded-xl bg-white text-[#FF5722] font-extrabold text-xs shadow-sm">
+                        <button onclick="openShopPortal()" class="px-3 py-1.5 rounded-xl bg-white text-[#FF5722] font-extrabold text-xs shadow-2xs shrink-0">
                             ဆိုင်ဖွင့်မည်
                         </button>
                     </div>
 
-                    <!-- PARTNER SHOPS HORIZONTAL STRIP -->
-                    <div class="space-y-2.5">
-                        <div class="flex items-center justify-between">
-                            <h3 id="t-home-shops-title" class="text-xs font-extrabold text-slate-900">🏪 Thipaw Delivery ရှိ ဆိုင်များ</h3>
-                            <button onclick="openFoodShopsDirectory()" id="t-view-all-shops" class="text-xs font-bold text-[#FF5722]">ဆိုင်အားလုံးကြည့်မည် →</button>
-                        </div>
-                        <div id="home-shops-strip" class="flex gap-3 overflow-x-auto no-scrollbar pb-1"></div>
-                    </div>
-
-                    <!-- INFO BANNER WITH RIDER & DELIVERY HOTLINES -->
-                    <div class="bg-white rounded-2xl p-4 border border-slate-200/80 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span id="t-home-rate-lbl" class="text-xs font-bold text-slate-700">ပို့ဆောင်ခနှုန်းထား (Delivery Rates)</span>
+                    <!-- INFO & PHONE CALL BUTTON ON HOME (PHONES HIDDEN UNTIL CLICKED) -->
+                    <div class="bg-white rounded-2xl p-3 border border-slate-200/80 flex items-center justify-between gap-2">
+                        <div>
+                            <span id="t-home-rate-lbl" class="text-[10px] font-bold text-slate-500 block">မြို့တွင်း ပို့ဆောင်ခ</span>
                             <span id="home-town-rate-val" class="text-xs font-extrabold text-[#FF5722]">Town: 2,000 Ks</span>
                         </div>
-                        <div class="pt-2 border-t border-slate-100 space-y-2">
-                            <div class="flex items-center justify-between">
-                                <span id="t-home-call-lbl" class="text-xs font-bold text-slate-700">📞 ဖုန်းဆက်မှာယူရန် (Rider & Delivery Hotlines)</span>
-                            </div>
-                            <div id="home-admin-hotlines-box" class="flex flex-wrap gap-2"></div>
-                        </div>
+                        <button type="button" onclick="openRiderHotlinesModal()" id="t-home-call-btn" class="px-3.5 py-2 rounded-xl bg-orange-100 hover:bg-orange-200 text-[#FF5722] font-extrabold text-xs flex items-center gap-1.5 transition shrink-0">
+                            <span>📞</span><span>ဖုန်းဆက်မှာယူရန်</span>
+                        </button>
                     </div>
                 </div>
 
@@ -317,7 +303,7 @@
                         <form onsubmit="submitCustomOrder(event)" class="space-y-3.5">
                             <div class="space-y-1">
                                 <label id="t-custom-shop-lbl" class="text-[11px] font-extrabold text-slate-700">ဆိုင် / ဈေးနာမည် (မထည့်လည်းရသည်)</label>
-                                <input type="text" id="custom-shop-name" placeholder="e.g. မြို့မဈေး / ဆေးဆိုင်" class="w-full rounded-xl bg-slate-50 border border-slate-200 px-3 py-2 text-xs text-slate-950 outline-none">
+                                <input type="text" id="custom-shop-name" placeholder="မြို့မဈေး / ဆေးဆိုင်" class="w-full rounded-xl bg-slate-50 border border-slate-200 px-3 py-2 text-xs text-slate-950 outline-none">
                             </div>
                             <div class="space-y-1">
                                 <label id="t-custom-items-lbl" class="text-[11px] font-extrabold text-slate-700">ဘာတွေဝယ်ခိုင်းချင်ပါသလဲ? (Items & Quantities)</label>
@@ -325,7 +311,7 @@
                             </div>
                             <div class="space-y-1">
                                 <label id="t-custom-addr-lbl" class="text-[11px] font-extrabold text-slate-700">ပို့ဆောင်ရမည့် လိပ်စာ</label>
-                                <input type="text" id="custom-address" required placeholder="Your address in Hsipaw" oninput="updateCustomFeeDisplay()" class="w-full rounded-xl bg-slate-50 border border-slate-200 px-3 py-2 text-xs text-slate-950 outline-none">
+                                <input type="text" id="custom-address" required placeholder="ရပ်ကွက် / လမ်းအမည်" oninput="updateCustomFeeDisplay()" class="w-full rounded-xl bg-slate-50 border border-slate-200 px-3 py-2 text-xs text-slate-950 outline-none">
                             </div>
                             <button type="button" onclick="captureCustomLocation()" id="custom-loc-btn" class="w-full py-2.5 rounded-xl bg-orange-50 border border-orange-200 text-[#FF5722] font-bold text-xs flex items-center justify-center gap-1.5">
                                 <span>📍</span><span id="t-custom-gps-btn">လက်ရှိ GPS တည်နေရာ ထည့်မည်</span>
@@ -341,78 +327,47 @@
                     </div>
                 </div>
 
-                <!-- BIKE TAXI VIEW (GRAB STYLE SEARCH BARS + FULLSCREEN MAP PIN + DIRECTIONS & LIVE MOTO TRACKING) -->
-                <div id="view-bike" class="p-4 space-y-4 hidden fade-in">
+                <!-- BIKE TAXI VIEW (CLEAN SEARCH BARS + FULLSCREEN MAP PIN + DIRECTIONS & LIVE MOTO TRACKING) -->
+                <div id="view-bike" class="p-3.5 space-y-3 hidden fade-in">
                     <!-- ACTIVE RIDE LIVE TRACKING CARD WITH DIRECTIONS & MOVING MOTO -->
                     <div id="customer-active-ride-tracker" class="hidden"></div>
 
-                    <!-- GRAB STYLE 2 SEARCH BARS & MAP PIN BOX -->
-                    <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200 space-y-3">
+                    <!-- CLEAN SEARCH BARS & MAP PIN BOX -->
+                    <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200 space-y-2.5">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-sm font-extrabold text-slate-900">🛵 Thipaw Bike Taxi</h2>
-                            <button type="button" onclick="openFullscreenBikeMap()" class="px-3 py-1.5 rounded-xl bg-orange-100 text-[#FF5722] font-extrabold text-xs flex items-center gap-1">
-                                <span>🗺️</span><span>Map ဖြင့် Pin ထောက်မည်</span>
+                            <h2 class="text-sm font-extrabold text-slate-900">🛵 Bike Taxi</h2>
+                            <button type="button" onclick="openFullscreenBikeMap()" class="px-3 py-1 rounded-xl bg-orange-100 text-[#FF5722] font-extrabold text-xs flex items-center gap-1">
+                                <span>📍</span><span>Map Pin</span>
                             </button>
                         </div>
 
-                        <form onsubmit="submitBikeOrder(event)" class="space-y-3">
+                        <form onsubmit="submitBikeOrder(event)" class="space-y-2.5">
                             <!-- SEARCH BAR 1: လက်ရှိနေရာ -->
-                            <div class="bg-slate-50 rounded-2xl p-3 border border-slate-200 space-y-2">
-                                <label class="text-[10px] font-extrabold text-blue-600 uppercase">၁။ လက်ရှိနေရာ (Pickup Location)</label>
-                                <div class="flex items-center gap-2">
-                                    <span class="w-3 h-3 rounded-full bg-blue-600 shrink-0"></span>
-                                    <input type="text" id="bike-pickup" required placeholder="လက်ရှိနေရာ ရိုက်ထည့်ပါ သို့မဟုတ် Map နှိပ်ပါ" onclick="activeBikeField='pickup'"
-                                        class="w-full bg-transparent text-xs font-bold text-slate-900 outline-none">
-                                </div>
-                                <div class="flex items-center justify-between pt-2 border-t border-slate-200/70 text-[11px]">
-                                    <button type="button" onclick="captureBikePickupGPS()" class="text-blue-600 font-extrabold flex items-center gap-1">
-                                        <span>🎯</span><span>လက်ရှိ GPS ယူမည်</span>
-                                    </button>
-                                    <button type="button" onclick="openFullscreenBikeMap('pickup')" class="text-[#FF5722] font-extrabold flex items-center gap-1">
-                                        <span>📍</span><span>Map တွင် Pin ထောက်မည်</span>
-                                    </button>
-                                </div>
+                            <div class="bg-slate-50 rounded-2xl px-3.5 py-2.5 border border-slate-200 flex items-center gap-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0"></span>
+                                <input type="text" id="bike-pickup" required placeholder="လက်ရှိနေရာ" onclick="activeBikeField='pickup'"
+                                    class="w-full bg-transparent text-xs font-bold text-slate-900 outline-none">
+                                <button type="button" onclick="captureBikePickupGPS()" title="GPS" class="text-blue-600 font-bold text-xs shrink-0">🎯</button>
+                                <button type="button" onclick="openFullscreenBikeMap('pickup')" title="Map" class="text-[#FF5722] font-bold text-xs shrink-0">📍</button>
                             </div>
 
                             <!-- SEARCH BAR 2: သွားမည့်နေရာ -->
-                            <div class="bg-slate-50 rounded-2xl p-3 border border-slate-200 space-y-2">
-                                <label class="text-[10px] font-extrabold text-[#FF5722] uppercase">၂။ သွားမည့်နေရာ (Destination)</label>
-                                <div class="flex items-center gap-2">
-                                    <span class="w-3 h-3 rounded-full bg-[#FF5722] shrink-0"></span>
-                                    <input type="text" id="bike-dropoff" required placeholder="သွားမည့် ရပ်ကွက် / နေရာ ရိုက်ထည့်ပါ" onclick="activeBikeField='dropoff'" oninput="recalculateBikeFare()"
-                                        class="w-full bg-transparent text-xs font-extrabold text-slate-900 outline-none">
-                                </div>
-                                <div class="flex items-center justify-between pt-2 border-t border-slate-200/70 text-[11px]">
-                                    <span class="text-slate-400">လက်တစ်ချောင်းဖြင့် Map ရွှေ့ရွေးနိုင်သည်</span>
-                                    <button type="button" onclick="openFullscreenBikeMap('dropoff')" class="text-[#FF5722] font-extrabold flex items-center gap-1">
-                                        <span>📍</span><span>Map တွင် Pin ထောက်မည်</span>
-                                    </button>
-                                </div>
+                            <div class="bg-slate-50 rounded-2xl px-3.5 py-2.5 border border-slate-200 flex items-center gap-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#FF5722] shrink-0"></span>
+                                <input type="text" id="bike-dropoff" required placeholder="သွားမည့်နေရာ" onclick="activeBikeField='dropoff'" oninput="recalculateBikeFare()"
+                                    class="w-full bg-transparent text-xs font-extrabold text-slate-900 outline-none">
+                                <button type="button" onclick="openFullscreenBikeMap('dropoff')" title="Map" class="text-[#FF5722] font-bold text-xs shrink-0">📍</button>
                             </div>
 
-                            <!-- SUGGESTED LANDMARKS & ADMIN CUSTOM ROUTES -->
-                            <div class="space-y-1.5">
-                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">အကြံပြုထားသော နေရာနှင့် လမ်းကြောင်းများ</span>
-                                <div id="grab-suggested-places" class="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden divide-y divide-slate-100 max-h-44 overflow-y-auto"></div>
-                            </div>
-
-                            <!-- DIRECT CALL RIDER BUTTON IF CANNOT PIN -->
-                            <div class="bg-orange-50 rounded-2xl p-3 border border-orange-200 flex items-center justify-between">
-                                <div>
-                                    <p class="text-xs font-extrabold text-slate-900">📞 Pin မထောက်တတ်ပါက ဖုန်းဆက်ခေါ်ရန်</p>
-                                    <p class="text-[10px] text-slate-500">Rider များကို တိုက်ရိုက်ဖုန်းခေါ်ဆို၍ မှာယူနိုင်ပါသည်</p>
-                                </div>
-                                <button type="button" onclick="openRiderHotlinesModal()" class="px-3.5 py-2 rounded-xl bg-[#FF5722] text-white font-extrabold text-xs shrink-0 shadow-sm">
-                                    Rider ဖုန်းခေါ်မည်
-                                </button>
-                            </div>
+                            <!-- QUICK PLACE CHIPS -->
+                            <div id="grab-suggested-places" class="flex gap-1.5 overflow-x-auto no-scrollbar py-0.5"></div>
 
                             <!-- GREEN BOTTOM ACTION BAR WITH FARE -->
-                            <button type="submit" id="t-book-bike-btn" class="w-full py-4 px-5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-lg flex items-center justify-between transition">
+                            <button type="submit" id="t-book-bike-btn" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-md flex items-center justify-between transition">
                                 <span>🛵 Bike ခေါ်မည်</span>
-                                <span id="bike-fare-display" class="bg-white/20 px-3 py-1 rounded-xl text-sm">4,000 Ks</span>
+                                <span id="bike-fare-display" class="bg-white/20 px-3 py-0.5 rounded-xl text-xs">4,000 Ks</span>
                             </button>
-                            <p id="bike-zone-label" class="text-[11px] text-center font-bold text-slate-500">Town Base Zone</p>
+                            <p id="bike-zone-label" class="text-[10px] text-center font-bold text-slate-400">Town Base Zone</p>
                         </form>
                     </div>
                 </div>
@@ -472,7 +427,7 @@
                                 <button type="button" onclick="setMainGoogleMapType('m')" id="btn-map-std" class="px-2.5 py-1 rounded-lg text-slate-600 text-xs font-bold">Standard</button>
                             </div>
                         </div>
-                        <div class="w-full h-80 rounded-2xl overflow-hidden border border-slate-200 relative interactive-map-container">
+                        <div class="w-full h-64 rounded-2xl overflow-hidden border border-slate-200 relative interactive-map-container">
                             <iframe id="main-google-map-iframe" width="100%" height="100%" frameborder="0" style="border:0" src="" allowfullscreen></iframe>
                         </div>
                         <div class="flex items-center justify-between text-xs pt-1">
@@ -486,21 +441,21 @@
                 </div>
 
                 <!-- ACCOUNT VIEW -->
-                <div id="view-account" class="p-4 space-y-4 hidden fade-in">
-                    <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 text-center space-y-3">
-                        <img id="account-avatar" src="" alt="Avatar" class="w-20 h-20 rounded-2xl mx-auto object-cover border-2 border-orange-200 shadow-sm">
-                        <div>
-                            <h2 id="account-name" class="text-base font-extrabold text-slate-900">User Name</h2>
-                            <p id="account-phone" class="text-xs text-slate-500 mt-0.5">09xxxxxxxxx</p>
-                            <p id="account-address" class="text-xs font-bold text-[#FF5722] mt-1">📍 Hsipaw</p>
+                <div id="view-account" class="p-4 space-y-3.5 hidden fade-in">
+                    <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200 flex items-center gap-3.5">
+                        <img id="account-avatar" src="" alt="Avatar" class="w-16 h-16 rounded-2xl object-cover border-2 border-orange-200 shadow-sm shrink-0">
+                        <div class="min-w-0 flex-1">
+                            <h2 id="account-name" class="text-base font-extrabold text-slate-900 truncate">User Name</h2>
+                            <p id="account-phone" class="text-xs text-slate-500">09xxxxxxxxx</p>
+                            <p id="account-address" class="text-xs font-bold text-[#FF5722] truncate mt-0.5">📍 Hsipaw</p>
                         </div>
                     </div>
 
                     <!-- DIRECT ADMIN SUPPORT CHAT BUTTON IN PROFILE / SETTINGS -->
-                    <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-4 text-white shadow-md flex items-center justify-between">
+                    <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-3.5 text-white shadow-md flex items-center justify-between">
                         <div class="space-y-0.5">
-                            <h3 class="text-xs font-extrabold">💬 အဆင်မပြေမှုများ Admin ထံ တိုက်ရိုက်စာပို့ရန်</h3>
-                            <p class="text-[10px] text-slate-300">Direct Support Chat with Admin</p>
+                            <h3 class="text-xs font-extrabold">💬 Admin ထံ တိုက်ရိုက်စာပို့ရန်</h3>
+                            <p class="text-[10px] text-slate-300">Direct Support Chat</p>
                         </div>
                         <button onclick="openSupportChatModal('customer')" class="px-3.5 py-2 rounded-xl bg-[#FF5722] text-white font-extrabold text-xs relative">
                             စာပို့မည်
@@ -508,26 +463,20 @@
                         </button>
                     </div>
 
-                    <!-- RIDER & DELIVERY HOTLINES DISPLAY IN PROFILE -->
-                    <div class="bg-white rounded-2xl p-4 border border-slate-200/80 space-y-2">
-                        <h3 class="text-xs font-extrabold text-slate-900">📞 Rider & Delivery ဖုန်းနံပါတ်များ</h3>
-                        <div id="profile-admin-hotlines-box" class="flex flex-wrap gap-2"></div>
-                    </div>
-
                     <!-- SETTINGS CARD & COMPREHENSIVE PERMISSIONS -->
                     <div class="bg-white rounded-2xl p-4 border border-slate-200/80 space-y-3">
                         <h3 id="t-settings-heading" class="text-xs font-extrabold text-slate-900">Settings & Permissions</h3>
-                        <div class="flex items-center justify-between py-2 border-b border-slate-100 text-xs">
+                        <div class="flex items-center justify-between py-1.5 border-b border-slate-100 text-xs">
                             <span id="t-lang-setting-lbl" class="font-bold text-slate-700">App Language</span>
                             <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
                                 <button type="button" onclick="setAppLanguage('en')" id="set-lang-en" class="px-3 py-1 rounded-lg text-xs font-bold">English</button>
                                 <button type="button" onclick="setAppLanguage('my')" id="set-lang-my" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FF5722] text-white">မြန်မာ</button>
                             </div>
                         </div>
-                        <div class="space-y-2 pt-1">
+                        <div class="space-y-2">
                             <div class="flex items-center justify-between text-xs">
-                                <span id="t-perm-title" class="font-bold text-slate-700">Device Permissions & GPS Sync</span>
-                                <button onclick="requestAllAppPermissions()" id="t-grant-all-perm" class="px-3 py-1.5 rounded-xl bg-orange-100 text-[#FF5722] font-extrabold text-[11px]">အားလုံးဖွင့်မည်</button>
+                                <span id="t-perm-title" class="font-bold text-slate-700">Device Permissions</span>
+                                <button onclick="requestAllAppPermissions()" id="t-grant-all-perm" class="px-3 py-1 rounded-xl bg-orange-100 text-[#FF5722] font-extrabold text-[11px]">အားလုံးဖွင့်မည်</button>
                             </div>
                             <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
                                 <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 cursor-pointer" onclick="requestLocationPermission()">
@@ -548,19 +497,19 @@
 
                     <!-- ACCOUNT ACTIONS -->
                     <div class="space-y-2">
-                        <button onclick="openEditProfile()" id="t-acc-edit" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
+                        <button onclick="openEditProfile()" id="t-acc-edit" class="w-full py-2.5 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
                             ✏️ ပရိုဖိုင်နှင့် ဓာတ်ပုံ ပြင်ဆင်မည်
                         </button>
-                        <button onclick="openShopPortal()" id="t-acc-shop" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
+                        <button onclick="openShopPortal()" id="t-acc-shop" class="w-full py-2.5 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
                             🏪 ဆိုင် Channel ဖွင့်ရန် / စီမံရန်
                         </button>
-                        <button onclick="openRiderPortalGate()" id="t-acc-rider" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
+                        <button onclick="openRiderPortalGate()" id="t-acc-rider" class="w-full py-2.5 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
                             🛵 ဝန်ထမ်း အော်ဒါကောက်ရန် နေရာ
                         </button>
-                        <button onclick="openAboutModal()" id="t-acc-about" class="w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
+                        <button onclick="openAboutModal()" id="t-acc-about" class="w-full py-2.5 px-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-extrabold text-xs text-left shadow-2xs">
                             ℹ️ App အကြောင်းနှင့် စည်းမျဉ်းစည်းကမ်းများ
                         </button>
-                        <button onclick="openPinModal()" id="t-acc-admin" class="w-full py-3 px-4 rounded-2xl bg-slate-900 text-white font-extrabold text-xs text-left shadow-sm">
+                        <button onclick="openPinModal()" id="t-acc-admin" class="w-full py-2.5 px-4 rounded-2xl bg-slate-900 text-white font-extrabold text-xs text-left shadow-sm">
                             🔒 Admin စီမံခန့်ခွဲမှု နေရာ
                         </button>
                     </div>
@@ -568,23 +517,23 @@
 
             </div>
 
-            <!-- BOTTOM NAVIGATION BAR -->
-            <div class="bg-white border-t border-slate-200 px-4 py-2.5 flex items-center justify-around shrink-0 z-20">
-                <button onclick="navigateToScreen('home')" id="nav-home" class="flex flex-col items-center text-[#FF5722] font-bold text-[11px] gap-0.5">
-                    <span class="text-lg">🏠</span>
+            <!-- FIXED BOTTOM NAVIGATION BAR (ALWAYS LOCKED AT BOTTOM OF SINGLE SCREEN, LIKE TIKTOK) -->
+            <div class="bg-white border-t border-slate-200 px-3 py-2 flex items-center justify-around shrink-0 z-30 shadow-[0_-4px_12px_rgba(0,0,0,0.04)]">
+                <button type="button" onclick="navigateToScreen('home')" id="nav-home" class="flex-1 flex flex-col items-center justify-center py-1 rounded-xl text-[#FF5722] font-bold text-[11px] gap-0.5 cursor-pointer select-none">
+                    <span class="text-base leading-none">🏠</span>
                     <span id="t-nav-home">Home</span>
                 </button>
-                <button onclick="navigateToScreen('activity')" id="nav-activity" class="flex flex-col items-center text-slate-400 font-semibold text-[11px] gap-0.5 relative">
-                    <span class="text-lg">📋</span>
+                <button type="button" onclick="navigateToScreen('activity')" id="nav-activity" class="flex-1 flex flex-col items-center justify-center py-1 rounded-xl text-slate-400 font-semibold text-[11px] gap-0.5 relative cursor-pointer select-none">
+                    <span class="text-base leading-none">📋</span>
                     <span id="t-nav-activity">Activity</span>
-                    <span id="nav-unread-dot" class="hidden absolute top-0 right-1 w-2 h-2 rounded-full bg-[#FF5722]"></span>
+                    <span id="nav-unread-dot" class="hidden absolute top-0.5 right-5 w-2 h-2 rounded-full bg-[#FF5722]"></span>
                 </button>
-                <button onclick="navigateToScreen('map')" id="nav-map" class="flex flex-col items-center text-slate-400 font-semibold text-[11px] gap-0.5">
-                    <span class="text-lg">🛰️</span>
+                <button type="button" onclick="navigateToScreen('map')" id="nav-map" class="flex-1 flex flex-col items-center justify-center py-1 rounded-xl text-slate-400 font-semibold text-[11px] gap-0.5 cursor-pointer select-none">
+                    <span class="text-base leading-none">🛰️</span>
                     <span id="t-nav-map">Map</span>
                 </button>
-                <button onclick="navigateToScreen('account')" id="nav-account" class="flex flex-col items-center text-slate-400 font-semibold text-[11px] gap-0.5">
-                    <span class="text-lg">👤</span>
+                <button type="button" onclick="navigateToScreen('account')" id="nav-account" class="flex-1 flex flex-col items-center justify-center py-1 rounded-xl text-slate-400 font-semibold text-[11px] gap-0.5 cursor-pointer select-none">
+                    <span class="text-base leading-none">👤</span>
                     <span id="t-nav-account">Profile</span>
                 </button>
             </div>
@@ -670,7 +619,7 @@
                 <button onclick="switchAdminTab('staff')" id="adm-tab-staff" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold whitespace-nowrap">🛵 Riders & Logs (<span id="admin-staff-pending-badge" class="text-red-600">0</span>)</button>
                 <button onclick="switchAdminTab('support')" id="adm-tab-support" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold whitespace-nowrap">💬 Customer Messages</button>
                 <button onclick="switchAdminTab('hotlines')" id="adm-tab-hotlines" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold whitespace-nowrap">📞 Rider Hotlines</button>
-                <button onclick="switchAdminTab('rates')" id="adm-tab-rates" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold whitespace-nowrap">💵 Rates, Routes & Hours</button>
+                <button onclick="switchAdminTab('rates')" id="adm-tab-rates" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold whitespace-nowrap">💵 Rates, PINs & Hours</button>
             </div>
 
             <div class="p-4 space-y-4 flex-1">
@@ -704,19 +653,45 @@
                 <div id="admin-view-hotlines" class="space-y-4 hidden">
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-4">
                         <div>
-                            <h3 class="text-xs font-extrabold text-slate-900">📞 ဖုန်းဆက်မှာယူရန် Rider & Delivery ဖုန်းနံပါတ်များ စီမံရန်</h3>
-                            <p class="text-[11px] text-slate-500 mt-0.5">Home စာမျက်နှာတွင် ပေါ်မည့် ဖုန်းနံပါတ်များကို အသစ်ထည့်ခြင်း သို့မဟုတ် ဖျက်ခြင်း ပြုလုပ်နိုင်ပါသည်။</p>
+                            <h3 class="text-xs font-extrabold text-slate-900">📞 ဖုန်းဆက်မှာယူရန် Rider နာမည်နှင့် ဖုန်းနံပါတ်များ စီမံရန်</h3>
+                            <p class="text-[11px] text-slate-500 mt-0.5">“ဖုန်းဆက်မှာယူရန်” ကို နှိပ်လိုက်မှ ပေါ်လာမည့် Rider နာမည်နှင့် ဖုန်းနံပါတ်များကို ထည့်ခြင်း၊ ဖျက်ခြင်း ပြုလုပ်နိုင်ပါသည်။</p>
                         </div>
-                        <form onsubmit="addAdminHotline(event)" class="flex gap-2">
-                            <input type="tel" id="new-admin-phone" required placeholder="09xxxxxxxxx (ဖုန်းနံပါတ်သစ်)" class="flex-1 rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs text-slate-950 outline-none">
-                            <button type="submit" class="px-4 py-2 rounded-xl bg-[#FF5722] text-white font-extrabold text-xs whitespace-nowrap">+ နံပါတ်ထည့်မည်</button>
+                        <form onsubmit="addAdminHotline(event)" class="space-y-2">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="new-admin-rider-name" required placeholder="Rider နာမည် (ဥပမာ - ကိုကျော်)" class="rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs text-slate-950 outline-none">
+                                <input type="tel" id="new-admin-phone" required placeholder="09xxxxxxxxx" class="rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs text-slate-950 outline-none">
+                            </div>
+                            <button type="submit" class="w-full py-2.5 rounded-xl bg-[#FF5722] text-white font-extrabold text-xs">+ Rider နံပါတ်ထည့်မည်</button>
                         </form>
                         <div id="admin-hotlines-manage-list" class="space-y-2 pt-2"></div>
                     </div>
                 </div>
 
-                <!-- TAB 5: RATES, CUSTOM BIKE ROUTES & OPERATING HOURS -->
+                <!-- TAB 5: RATES, PINS, CUSTOM BIKE ROUTES & OPERATING HOURS -->
                 <div id="admin-view-rates" class="space-y-4 hidden">
+                    <!-- CUSTOMIZABLE PINS CONFIG (ADMIN, RIDER, SHOP) -->
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="text-xs font-extrabold text-slate-900">🔐 Admin / ဝန်ထမ်း / ဆိုင်ဖွင့် PIN များ ပြုပြင်ရန်</h3>
+                        <p class="text-[11px] text-slate-500">ဝင်ရောက်ခွင့် PIN နံပါတ် ၄ လုံးစီကို စိတ်ကြိုက် ပြောင်းလဲသိမ်းဆည်းနိုင်ပါသည်။</p>
+                        <form onsubmit="saveCustomPins(event)" class="space-y-3 text-xs">
+                            <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                    <label class="font-bold text-slate-700">Admin PIN</label>
+                                    <input type="text" id="cfg-pin-admin" maxlength="4" inputmode="numeric" required class="w-full mt-1 rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-2 font-extrabold text-center text-slate-950">
+                                </div>
+                                <div>
+                                    <label class="font-bold text-slate-700">ဝန်ထမ်း PIN</label>
+                                    <input type="text" id="cfg-pin-rider" maxlength="4" inputmode="numeric" required class="w-full mt-1 rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-2 font-extrabold text-center text-slate-950">
+                                </div>
+                                <div>
+                                    <label class="font-bold text-slate-700">ဆိုင်ဖွင့် PIN</label>
+                                    <input type="text" id="cfg-pin-shop" maxlength="4" inputmode="numeric" required class="w-full mt-1 rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-2 font-extrabold text-center text-slate-950">
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full py-2.5 rounded-xl bg-slate-900 text-white font-extrabold">PIN နံပါတ်များ သိမ်းဆည်းမည်</button>
+                        </form>
+                    </div>
+
                     <!-- OPERATING HOURS CONFIG -->
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-3">
                         <h3 class="text-xs font-extrabold text-slate-900">⏰ အော်ဒါစကောက်ချိန်နှင့် အော်ဒါပိတ်ချိန် သတ်မှတ်ရန်</h3>
@@ -887,15 +862,15 @@
             </div>
         </div>
 
-        <!-- 8. RIDER HOTLINES DIALOG MODAL (PHONE CALL METHOD) -->
+        <!-- 8. RIDER HOTLINES DIALOG MODAL (RIDER NAME + PHONE LIST ON CLICK) -->
         <div id="rider-hotlines-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-            <div class="bg-white rounded-3xl max-w-xs w-full p-6 text-center shadow-2xl space-y-4 fade-in">
+            <div class="bg-white rounded-3xl max-w-xs w-full p-5 text-center shadow-2xl space-y-3 fade-in">
                 <div class="w-12 h-12 bg-orange-100 text-[#FF5722] rounded-2xl flex items-center justify-center text-xl mx-auto">📞</div>
                 <div>
-                    <h3 class="text-base font-extrabold text-slate-900">Rider & Delivery ဖုန်းခေါ်ဆိုရန်</h3>
-                    <p class="text-xs text-slate-500 mt-1">Pin မထောက်တတ်ပါက အောက်ပါနံပါတ်များကို တိုက်ရိုက်ဖုန်းဆက်၍ မှာယူနိုင်ပါသည်</p>
+                    <h3 class="text-base font-extrabold text-slate-900">ဖုန်းဆက်မှာယူရန် (Rider စာရင်း)</h3>
+                    <p class="text-[11px] text-slate-500 mt-0.5">နှိပ်၍ တိုက်ရိုက် ဖုန်းခေါ်ဆိုနိုင်ပါသည်</p>
                 </div>
-                <div id="modal-admin-hotlines-box" class="space-y-2 py-2"></div>
+                <div id="modal-admin-hotlines-box" class="space-y-2 py-1 max-h-60 overflow-y-auto"></div>
                 <button onclick="closeRiderHotlinesModal()" class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-800 font-bold text-xs">ပိတ်မည်</button>
             </div>
         </div>
@@ -1024,10 +999,6 @@
     <div id="toast-box" class="fixed bottom-20 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-xl hidden z-50 text-center max-w-[88%]"></div>
 
     <script>
-        const ADMIN_SECRET_PIN = "1234";
-        const RIDER_SECRET_PIN = "5555";
-        const SHOP_SECRET_PIN  = "8888";
-
         const HSIPAW_LAT = 22.6238;
         const HSIPAW_LNG = 97.3005;
 
@@ -1060,6 +1031,9 @@
         const SUPPORT_CHATS_KEY = 'td_support_chats';
 
         const DEFAULT_CONFIG = {
+            adminPin: "1234",
+            riderPin: "5555",
+            shopPin: "8888",
             orderTown: 2000,
             orderOuter: 3000,
             orderExtraStop: 500,
@@ -1080,14 +1054,21 @@
             ]
         };
 
+        function normalizeHotlines(raw) {
+            if (!Array.isArray(raw)) return [{ name: "Rider ၁", phone: "09981968136" }];
+            return raw.map((item, i) => {
+                if (typeof item === 'string') return { name: `Rider ${i + 1}`, phone: item };
+                return { name: item.name || `Rider ${i + 1}`, phone: item.phone || "" };
+            }).filter(x => x.phone);
+        }
+
         let currentLang = localStorage.getItem(LANG_KEY) || 'my';
         let termsAccepted = localStorage.getItem(TERMS_KEY) === 'true';
         let userProfile = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)) || null;
         let appConfig = Object.assign({}, DEFAULT_CONFIG, JSON.parse(localStorage.getItem(CONFIG_STORAGE_KEY)) || {});
-        let adminHotlines = JSON.parse(localStorage.getItem(HOTLINES_STORAGE_KEY)) || ["09981968136", "09450012345"];
+        let adminHotlines = normalizeHotlines(JSON.parse(localStorage.getItem(HOTLINES_STORAGE_KEY)));
         let supportChats = JSON.parse(localStorage.getItem(SUPPORT_CHATS_KEY)) || [];
 
-        // REMOVED DUMMY EXAMPLE SHOPS/ITEMS TO START CLEAN AS REQUESTED
         let allShops = JSON.parse(localStorage.getItem(SHOPS_STORAGE_KEY)) || [];
         let allOrders = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY)) || [];
         let allRiders = JSON.parse(localStorage.getItem(RIDERS_STORAGE_KEY)) || [];
@@ -1123,11 +1104,11 @@
         let lastKnownOrderCount = allOrders.length;
 
         const HSIPAW_PLACES = [
-            { name: "သီပေါမြို့မဈေး (Central Market)", sub: "ဈေးပိုင်းရပ်ကွက်၊ သီပေါမြို့လယ်", lat: 22.6238, lng: 97.3005 },
-            { name: "သီပေါဟော်နန်း (Haw Palace)", sub: "မြောက်ရပ်ကွက်၊ ဟော်နန်းလမ်း", lat: 22.6295, lng: 97.2950 },
-            { name: "ဒုဋ္ဌဝတီတံတားဂိတ် (Bridge Gate)", sub: "အရှေ့ဘက် တံတားထိပ်", lat: 22.6170, lng: 97.3110 },
-            { name: "အဝေးပြေးကားဂိတ် (Bus Station)", sub: "လားရှိုး - မန္တလေး လမ်းမကြီး", lat: 22.6210, lng: 97.3045 },
-            { name: "ဘော်ကြိုဘုရား (Bawgyo Pagoda)", sub: "ဘော်ကြိုကျေးရွာ၊ သီပေါအနောက်ဘက်", lat: 22.6580, lng: 97.2650 }
+            { name: "သီပေါမြို့မဈေး", sub: "ဈေးပိုင်းရပ်ကွက်", lat: 22.6238, lng: 97.3005 },
+            { name: "သီပေါဟော်နန်း", sub: "မြောက်ရပ်ကွက်", lat: 22.6295, lng: 97.2950 },
+            { name: "ဒုဋ္ဌဝတီတံတားဂိတ်", sub: "တံတားထိပ်", lat: 22.6170, lng: 97.3110 },
+            { name: "အဝေးပြေးကားဂိတ်", sub: "လားရှိုး - မန္တလေးလမ်း", lat: 22.6210, lng: 97.3045 },
+            { name: "ဘော်ကြိုဘုရား", sub: "ဘော်ကြိုကျေးရွာ", lat: 22.6580, lng: 97.2650 }
         ];
 
         const I18N = {
@@ -1145,7 +1126,7 @@
                 regSubmit: "Save & Continue",
                 cityBadge: "📍 Hsipaw",
                 riderBtn: "Rider",
-                searchPlaceholder: "Search shops or menus in Hsipaw...",
+                searchPlaceholder: "Search shops or menus...",
                 svcFood: "Food",
                 svcFoodSub: "Shop Menus",
                 svcCustom: "Order",
@@ -1156,17 +1137,15 @@
                 svcMapSub: "Explore Hsipaw",
                 svcShop: "Open Shop",
                 svcShopSub: "Merchant Portal",
-                homeShopsTitle: "🏪 Partner Shops on Thipaw Delivery",
-                viewAllShops: "View All →",
                 homeRateLbl: "Town Delivery",
-                homeCallLbl: "📞 Rider & Delivery Hotlines",
+                homeCallBtn: "Call to Order",
                 navHome: "Home",
                 navActivity: "Activity",
                 navMap: "Map",
                 navAccount: "Profile"
             },
             my: {
-                welcomeSub: "သီပေါမြို့တွင်း ပို့ဆောင်ခနှင့် ဆိုင်ကယ်ကယ်ရီ နှုန်းထားများ",
+                welcomeSub: "သီပေါမြို့တွင်း ပို့ဆောင်ခ နှုန်းထားနှင့် စည်းကမ်းချက်များ",
                 ratesHeading: "ပို့ဆောင်ခနှင့် ဆိုင်ကယ်ကယ်ရီ နှုန်းထားများ",
                 rulesHeading: "ဝန်ဆောင်မှု စည်းကမ်းချက်များ",
                 agreeBtn: "သဘောတူပါတယ် - အကောင့်ဖွင့်မည်",
@@ -1190,10 +1169,8 @@
                 svcMapSub: "ဂြိုဟ်တုမြေပုံ",
                 svcShop: "ဆိုင်ဖွင့်မည်",
                 svcShopSub: "ဆိုင်ရှင်များ",
-                homeShopsTitle: "🏪 Thipaw Delivery ရှိ ဆိုင်များ",
-                viewAllShops: "ဆိုင်အားလုံးကြည့်မည် →",
                 homeRateLbl: "မြို့တွင်း ပို့ဆောင်ခ",
-                homeCallLbl: "📞 ဖုန်းဆက်မှာယူရန် (Rider & Delivery Hotlines)",
+                homeCallBtn: "ဖုန်းဆက်မှာယူရန်",
                 navHome: "Home",
                 navActivity: "Activity",
                 navMap: "Map",
@@ -1233,10 +1210,9 @@
             setTxt('t-svc-map-sub', t.svcMapSub);
             setTxt('t-svc-shop', t.svcShop);
             setTxt('t-svc-shop-sub', t.svcShopSub);
-            setTxt('t-home-shops-title', t.homeShopsTitle);
-            setTxt('t-view-all-shops', t.viewAllShops);
             setTxt('t-home-rate-lbl', t.homeRateLbl);
-            setTxt('t-home-call-lbl', t.homeCallLbl);
+            const callBtn = document.getElementById('t-home-call-btn');
+            if (callBtn) callBtn.innerHTML = `<span>📞</span><span>${t.homeCallBtn}</span>`;
             setTxt('t-nav-home', t.navHome);
             setTxt('t-nav-activity', t.navActivity);
             setTxt('t-nav-map', t.navMap);
@@ -1268,12 +1244,28 @@
             if (badge) {
                 if (hr >= 6 && hr < 19) {
                     badge.textContent = "OPEN";
-                    badge.className = "px-2 py-0.5 rounded-md bg-emerald-600 text-white text-[10px] font-extrabold";
+                    badge.className = "px-1.5 py-0.2 rounded bg-emerald-600 text-white text-[9px] font-extrabold shrink-0";
                 } else {
                     badge.textContent = "CLOSED";
-                    badge.className = "px-2 py-0.5 rounded-md bg-amber-600 text-white text-[10px] font-extrabold";
+                    badge.className = "px-1.5 py-0.2 rounded bg-amber-600 text-white text-[9px] font-extrabold shrink-0";
                 }
             }
+        }
+
+        function saveCustomPins(e) {
+            e.preventDefault();
+            const adm = document.getElementById('cfg-pin-admin').value.trim();
+            const rdr = document.getElementById('cfg-pin-rider').value.trim();
+            const shp = document.getElementById('cfg-pin-shop').value.trim();
+            if (adm.length !== 4 || rdr.length !== 4 || shp.length !== 4) {
+                showToast("PIN နံပါတ် ၄ လုံးစီ ဖြည့်ပါ");
+                return;
+            }
+            appConfig.adminPin = adm;
+            appConfig.riderPin = rdr;
+            appConfig.shopPin = shp;
+            saveConfig();
+            showToast("Admin, ဝန်ထမ်း နှင့် ဆိုင်ဖွင့် PIN များ သိမ်းဆည်းပြီးပါပြီ");
         }
 
         function saveOperatingHours(e) {
@@ -1286,28 +1278,29 @@
         }
 
         function renderAdminHotlinesUI() {
-            const homeBox = document.getElementById('home-admin-hotlines-box');
-            const profileBox = document.getElementById('profile-admin-hotlines-box');
             const modalBox = document.getElementById('modal-admin-hotlines-box');
             const manageList = document.getElementById('admin-hotlines-manage-list');
 
-            const hotlinesHtml = adminHotlines.map(num => `
-                <a href="tel:${num}" class="px-3.5 py-2.5 rounded-xl bg-orange-100 hover:bg-orange-200 text-[#FF5722] font-extrabold text-xs flex items-center justify-center gap-2 transition w-full">
-                    <span>📞</span><span>ဖုန်းခေါ်မည်: ${escapeHtml(num)}</span>
-                </a>
-            `).join('');
-
-            if (homeBox) homeBox.innerHTML = hotlinesHtml;
-            if (profileBox) profileBox.innerHTML = hotlinesHtml;
-            if (modalBox) modalBox.innerHTML = hotlinesHtml;
+            if (modalBox) {
+                if (!adminHotlines.length) {
+                    modalBox.innerHTML = `<p class="text-xs text-slate-400 py-2">Rider ဖုန်းနံပါတ် မရှိသေးပါ</p>`;
+                } else {
+                    modalBox.innerHTML = adminHotlines.map(item => `
+                        <a href="tel:${escapeAttr(item.phone)}" class="px-3.5 py-2.5 rounded-xl bg-orange-50 hover:bg-orange-100 border border-orange-200 text-slate-900 font-extrabold text-xs flex items-center justify-between transition w-full">
+                            <span class="truncate">🛵 ${escapeHtml(item.name)}</span>
+                            <span class="text-[#FF5722] shrink-0 ml-2">📞 ${escapeHtml(item.phone)}</span>
+                        </a>
+                    `).join('');
+                }
+            }
 
             if (manageList) {
                 if (adminHotlines.length === 0) {
                     manageList.innerHTML = `<p class="text-xs text-slate-400">ဖုန်းနံပါတ် မရှိသေးပါ</p>`;
                 } else {
-                    manageList.innerHTML = adminHotlines.map((num, idx) => `
+                    manageList.innerHTML = adminHotlines.map((item, idx) => `
                         <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-xs">
-                            <span class="font-bold text-slate-900">📞 ${escapeHtml(num)}</span>
+                            <span class="font-bold text-slate-900">🛵 ${escapeHtml(item.name)} • 📞 ${escapeHtml(item.phone)}</span>
                             <button type="button" onclick="removeAdminHotline(${idx})" class="px-2.5 py-1 rounded-lg bg-red-50 text-red-600 font-bold">ဖယ်ရှားမည်</button>
                         </div>
                     `).join('');
@@ -1316,6 +1309,7 @@
         }
 
         function openRiderHotlinesModal() {
+            renderAdminHotlinesUI();
             const m = document.getElementById('rider-hotlines-modal');
             m.classList.remove('hidden');
             m.classList.add('flex');
@@ -1328,12 +1322,15 @@
 
         function addAdminHotline(e) {
             e.preventDefault();
-            const input = document.getElementById('new-admin-phone');
-            const num = input.value.trim();
-            if (!num) return;
-            adminHotlines.push(num);
+            const nameInput = document.getElementById('new-admin-rider-name');
+            const phoneInput = document.getElementById('new-admin-phone');
+            const name = nameInput.value.trim();
+            const phone = phoneInput.value.trim();
+            if (!name || !phone) return;
+            adminHotlines.push({ name, phone });
             localStorage.setItem(HOTLINES_STORAGE_KEY, JSON.stringify(adminHotlines));
-            input.value = "";
+            nameInput.value = "";
+            phoneInput.value = "";
             renderAdminHotlinesUI();
             showToast("Rider ဖုန်းနံပါတ် အသစ်ထည့်ပြီးပါပြီ");
         }
@@ -1426,7 +1423,7 @@
                     if (res === "granted") {
                         document.getElementById('perm-noti-status').textContent = "✅ Allowed";
                         document.getElementById('perm-noti-status').className = "text-[10px] font-bold text-emerald-600";
-                        showToast("အော်ဒါအသံနှင့် Noti ဖွင့်ပြီးပါပြီ (TikTok သုံးနေစဉ်လည်း အသံမြည်ပါမည်)");
+                        showToast("အော်ဒါအသံနှင့် Noti ဖွင့်ပြီးပါပြီ");
                     }
                 });
             }
@@ -1519,7 +1516,6 @@
                 document.getElementById('view-home').classList.remove('hidden');
                 highlightNav('nav-home');
                 renderOperatingHoursUI();
-                renderHomeShopsStrip();
                 renderHomeActiveOrder();
                 renderAdminHotlinesUI();
             } else if (screenKey === 'food') {
@@ -1728,25 +1724,6 @@
             }
         }
 
-        function renderHomeShopsStrip() {
-            const strip = document.getElementById('home-shops-strip');
-            if (!allShops.length) {
-                strip.innerHTML = `<p class="text-xs text-slate-400">ဆိုင်များ မရှိသေးပါ (ဆိုင်ရှင်များ ဆိုင်ဖွင့်နိုင်ပါသည်)</p>`;
-                return;
-            }
-            strip.innerHTML = allShops.map(shop => `
-                <button onclick="openShopStorefront('${shop.id}')"
-                    class="bg-white border border-slate-200/80 rounded-2xl p-2.5 flex items-center gap-2.5 shrink-0 w-[215px] text-left shadow-2xs hover:border-orange-300 transition">
-                    <img src="${shop.photo || DEFAULT_SHOP_IMG}" class="w-12 h-12 rounded-xl object-cover bg-orange-50 shrink-0 border border-slate-100">
-                    <div class="min-w-0">
-                        <p class="text-xs font-extrabold text-slate-900 truncate">${escapeHtml(shop.name)}</p>
-                        <p class="text-[10px] text-slate-500 truncate mt-0.5">📍 ${escapeHtml(shop.address)}</p>
-                        <span class="inline-block text-[10px] font-bold text-[#FF5722] mt-0.5">ဆိုင်Page ဝင်ကြည့်မည် →</span>
-                    </div>
-                </button>
-            `).join('');
-        }
-
         function openFoodShopsDirectory() {
             currentFoodCategory = 'shops';
             navigateToScreen('food');
@@ -1759,16 +1736,16 @@
             const unread = countUnreadForOrder(active, 'customer');
             wrap.classList.remove('hidden');
             wrap.innerHTML = `
-                <div class="bg-white rounded-2xl p-3.5 border border-orange-200 shadow-xs flex items-center justify-between gap-3">
+                <div class="bg-white rounded-2xl p-2.5 border border-orange-200 shadow-2xs flex items-center justify-between gap-2">
                     <div class="min-w-0">
                         <div class="flex items-center gap-1.5">
                             <span class="w-2 h-2 rounded-full bg-[#FF5722] animate-pulse"></span>
-                            <span class="text-[11px] font-extrabold text-[#FF5722]">Active • ${escapeHtml(active.status)}</span>
+                            <span class="text-[10px] font-extrabold text-[#FF5722]">Active • ${escapeHtml(active.status)}</span>
                         </div>
-                        <p class="text-xs font-bold text-slate-900 truncate mt-0.5">${escapeHtml(active.details)}</p>
+                        <p class="text-xs font-bold text-slate-900 truncate">${escapeHtml(active.details)}</p>
                     </div>
                     <button onclick="openChatModal(${active.id}, 'customer')"
-                        class="px-3 py-2 rounded-xl bg-orange-100 hover:bg-orange-200 text-[#FF5722] font-extrabold text-xs shrink-0 transition">
+                        class="px-3 py-1.5 rounded-xl bg-orange-100 hover:bg-orange-200 text-[#FF5722] font-extrabold text-xs shrink-0 transition">
                         💬 Chat ${unread > 0 ? `<span class="ml-1 px-1.5 py-0.2 bg-[#FF5722] text-white rounded-full text-[10px]">${unread}</span>` : ''}
                     </button>
                 </div>
@@ -2129,35 +2106,27 @@
             const list = document.getElementById('grab-suggested-places');
             if (!list) return;
 
-            const customRouteBtns = (appConfig.customBikeRoutes || []).map(r => `
+            const customRouteChips = (appConfig.customBikeRoutes || []).map(r => `
                 <button type="button" onclick="applyCustomBikeRoute('${escapeAttr(r.from)}', '${escapeAttr(r.to)}', ${r.price})"
-                    class="w-full px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-orange-50 transition">
-                    <div>
-                        <p class="text-xs font-extrabold text-slate-900">🛵 ${escapeHtml(r.from)} → ${escapeHtml(r.to)}</p>
-                        <p class="text-[10px] text-slate-500">သတ်မှတ်ထားသော လမ်းကြောင်းနှုန်းထား</p>
-                    </div>
-                    <span class="text-xs font-extrabold text-[#FF5722]">${Number(r.price).toLocaleString()} Ks</span>
+                    class="px-2.5 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-[#FF5722] font-bold text-[11px] whitespace-nowrap shrink-0">
+                    🛵 ${escapeHtml(r.from)}→${escapeHtml(r.to)} (${Number(r.price).toLocaleString()})
                 </button>
             `).join('');
 
-            const landmarkBtns = HSIPAW_PLACES.map(p => `
+            const landmarkChips = HSIPAW_PLACES.map(p => `
                 <button type="button" onclick="applyGrabSuggestedPlace('${escapeAttr(p.name)}', ${p.lat}, ${p.lng})"
-                    class="w-full px-3.5 py-2.5 flex items-start gap-2.5 text-left hover:bg-slate-100 transition">
-                    <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[11px] shrink-0 mt-0.5">📍</span>
-                    <div class="min-w-0 flex-1">
-                        <p class="text-xs font-bold text-slate-900 truncate">${escapeHtml(p.name)}</p>
-                        <p class="text-[10px] text-slate-500 truncate">${escapeHtml(p.sub)}</p>
-                    </div>
+                    class="px-2.5 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 font-bold text-[11px] whitespace-nowrap shrink-0">
+                    📍 ${escapeHtml(p.name)}
                 </button>
             `).join('');
 
-            list.innerHTML = customRouteBtns + landmarkBtns;
+            list.innerHTML = customRouteChips + landmarkChips;
         }
 
         function applyCustomBikeRoute(from, to, price) {
             document.getElementById('bike-pickup').value = from;
             document.getElementById('bike-dropoff').value = to;
-            document.getElementById('bike-zone-label').textContent = `${from} မှ ${to} သို့`;
+            document.getElementById('bike-zone-label').textContent = `${from} → ${to}`;
             document.getElementById('bike-fare-display').textContent = `${Number(price).toLocaleString()} Ks`;
         }
 
@@ -2186,7 +2155,7 @@
                     },
                     () => {
                         bikePickupCoords = { lat: HSIPAW_LAT, lng: HSIPAW_LNG };
-                        document.getElementById('bike-pickup').value = "သီပေါမြို့လယ် (Current Location)";
+                        document.getElementById('bike-pickup').value = "သီပေါမြို့လယ်";
                     }
                 );
             }
@@ -2335,26 +2304,22 @@
             const pLng = activeRide.pickupLng || HSIPAW_LNG;
             const dLat = activeRide.dropoffLat || HSIPAW_LAT;
             const dLng = activeRide.dropoffLng || HSIPAW_LNG;
-            const rLat = activeRide.riderLiveLat || pLat;
-            const rLng = activeRide.riderLiveLng || pLng;
 
             let statusBanner = `<span class="text-xs font-extrabold text-amber-700">⏳ Rider ရှာဖွေနေပါသည်...</span>`;
             if (activeRide.status === 'Accepted') {
                 statusBanner = `<span class="text-xs font-extrabold text-blue-700">🛵 Rider (${escapeHtml(activeRide.assignedRiderName)}) ခုလာခေါ်နေပါပြီ!</span>`;
             } else if (activeRide.status === 'On the way') {
-                statusBanner = `<span class="text-xs font-extrabold text-emerald-700">🚀 လမ်းကြောင်း (Directions) နှင့် 🛵 ရွှေ့နေသော ပုံပေါ်နေပါပြီ</span>`;
+                statusBanner = `<span class="text-xs font-extrabold text-emerald-700">🚀 ခရီးစဉ် စတင်နေပါပြီ</span>`;
             }
 
-            // EMBED GOOGLE MAPS DIRECTIONS ROUTE QUERY BETWEEN PICKUP & DROPOFF WITH MOVING MOTO
             box.innerHTML = `
                 <div class="bg-white rounded-3xl p-4 border-2 border-emerald-500 shadow-md space-y-3">
                     <div class="flex items-center justify-between">
                         ${statusBanner}
                         <button onclick="openChatModal(${activeRide.id}, 'customer')" class="px-3 py-1.5 rounded-xl bg-slate-900 text-white font-bold text-xs">💬 Chat</button>
                     </div>
-                    <div class="w-full h-52 rounded-2xl overflow-hidden border border-slate-200 relative interactive-map-container">
+                    <div class="w-full h-48 rounded-2xl overflow-hidden border border-slate-200 relative interactive-map-container">
                         <iframe width="100%" height="100%" frameborder="0" style="border:0" src="https://maps.google.com/maps?saddr=${pLat},${pLng}&daddr=${dLat},${dLng}&t=m&z=15&output=embed"></iframe>
-                        <!-- MOVING RIDER PIN OVERLAY ALONG DIRECTIONS -->
                         <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
                             <div class="flex flex-col items-center">
                                 <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-[9px] font-extrabold shadow mb-0.5">Rider 🛵</span>
@@ -2362,9 +2327,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between text-[11px] font-bold text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                        <span>📍 ထွက်ခွာ: ${escapeHtml(activeRide.pickupAddress)}</span>
-                        <span>→ သို့: ${escapeHtml(activeRide.dropoffAddress)}</span>
+                    <div class="flex items-center justify-between text-[11px] font-bold text-slate-700 bg-slate-50 p-2 rounded-xl border border-slate-200">
+                        <span class="truncate">📍 ${escapeHtml(activeRide.pickupAddress)}</span>
+                        <span class="truncate ml-2">→ ${escapeHtml(activeRide.dropoffAddress)}</span>
                     </div>
                 </div>
             `;
@@ -2463,7 +2428,7 @@
         }
 
         function verifyRiderPin() {
-            if (document.getElementById('rider-pin-input').value.trim() === RIDER_SECRET_PIN) {
+            if (document.getElementById('rider-pin-input').value.trim() === String(appConfig.riderPin || "5555")) {
                 myRiderSession = { pinVerified: true, riderId: null };
                 localStorage.setItem(MY_RIDER_SESSION_KEY, JSON.stringify(myRiderSession));
                 closeRiderPinModal();
@@ -2524,8 +2489,6 @@
                 myWrap.innerHTML = `<h2 class="text-xs font-extrabold text-emerald-800 uppercase tracking-wider">လက်ရှိပို့ဆောင်နေသော အော်ဒါများ (${myActive.length})</h2>` +
                 myActive.map(order => {
                     const isBike = order.type === 'bike';
-                    const lat = order.riderLiveLat || order.dropoffLat || HSIPAW_LAT;
-                    const lng = order.riderLiveLng || order.dropoffLng || HSIPAW_LNG;
 
                     const startTripBtn = (isBike && order.status === 'Accepted')
                         ? `<button onclick="startBikeTripByRider(${order.id})" class="w-full py-3 rounded-xl bg-blue-600 text-white font-extrabold text-xs shadow-sm">🚀 ငှားသူထံရောက်ပြီ - လမ်းကြောင်း (Directions) စတင်မည်</button>`
@@ -2539,7 +2502,6 @@
                                 <p class="text-xs text-slate-700 whitespace-pre-line mt-1">${escapeHtml(order.details)}</p>
                                 <p class="text-xs text-slate-500 mt-1">📍 ပို့ရမည့်နေရာ: ${escapeHtml(order.dropoffAddress)}</p>
                             </div>
-                            <!-- RIDER NAVIGATION MAP WITH DIRECTIONS -->
                             <div class="w-full h-44 rounded-2xl overflow-hidden border border-slate-200 relative interactive-map-container">
                                 <iframe width="100%" height="100%" frameborder="0" style="border:0" src="https://maps.google.com/maps?saddr=${order.pickupLat},${order.pickupLng}&daddr=${order.dropoffLat},${order.dropoffLng}&t=m&z=15&output=embed"></iframe>
                             </div>
@@ -2665,7 +2627,7 @@
         }
 
         function verifyPin() {
-            if (document.getElementById('pin-input').value.trim() === ADMIN_SECRET_PIN) {
+            if (document.getElementById('pin-input').value.trim() === String(appConfig.adminPin || "1234")) {
                 closePinModal();
                 navigateToScreen('admin');
             } else { document.getElementById('pin-error').classList.remove('hidden'); }
@@ -2780,6 +2742,9 @@
         }
 
         function populateAdminConfigForm() {
+            document.getElementById('cfg-pin-admin').value = appConfig.adminPin || "1234";
+            document.getElementById('cfg-pin-rider').value = appConfig.riderPin || "5555";
+            document.getElementById('cfg-pin-shop').value = appConfig.shopPin || "8888";
             document.getElementById('cfg-open-time').value = appConfig.openTime || "မနက် ၆:၀၀ နာရီ";
             document.getElementById('cfg-close-time').value = appConfig.closeTime || "ည ၇:၀၀ နာရီ";
             document.getElementById('cfg-order-town').value = appConfig.orderTown;
@@ -2867,7 +2832,7 @@
         }
 
         function verifyShopPassword() {
-            if (document.getElementById('shop-pass-input').value.trim() === SHOP_SECRET_PIN) {
+            if (document.getElementById('shop-pass-input').value.trim() === String(appConfig.shopPin || "8888")) {
                 shopUnlocked = true;
                 closeShopPassModal();
                 navigateToScreen('shop-manager');
