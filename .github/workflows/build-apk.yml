@@ -1,0 +1,62 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Create Capacitor WebView App
+        run: |
+          mkdir -p app_src/www
+          cp -r index.html manifest.json sw.js *.png app_src/www/ 2>/dev/null || true
+          cd app_src
+          npm init -y
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "ThipawApp" "com.thuyain16.app" --web-dir=www
+          npx cap add android
+          cat << 'EOF' > android/app/src/main/java/com/thuyain16/app/MainActivity.java
+          package com.thuyain16.app;
+
+          import android.os.Bundle;
+          import android.webkit.WebSettings;
+          import com.getcapacitor.BridgeActivity;
+
+          public class MainActivity extends BridgeActivity {
+            @Override
+            public void onCreate(Bundle savedInstanceState) {
+              super.onCreate(savedInstanceState);
+              if (this.bridge != null && this.bridge.getWebView() != null) {
+                WebSettings settings = this.bridge.getWebView().getSettings();
+                settings.setSupportZoom(false);
+                settings.setBuiltInZoomControls(false);
+                settings.setDisplayZoomControls(false);
+              }
+            }
+          }
+          EOF
+          cd android
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-app-apk
+          path: app_src/android/app/build/outputs/apk/debug/app-debug.apk
