@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.thuyain16.twa",
+        "sha256_cert_fingerprints": ["7E:3A:F8:15:00:62:53:3D:DC:2F:A8:EB:7F:55:13:E8:DD:9B:95:6A:7A:0E:C8:F0:C8:BB:B7:E0:F9:53:B9:FE"]
+      }
+    }]
