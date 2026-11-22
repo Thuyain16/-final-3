@@ -18,7 +18,11 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', 'Pyidaungsu', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', 'Pyidaungsu', sans-serif; }}
+html, body {
+  overscroll-behavior-y: none;
+}
+
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
